@@ -1,0 +1,68 @@
+.jb-tooltip-message-web-component{
+    width: auto;
+    --bg-color:#000000cf;
+    display: grid;
+    grid-template-columns: 1fr;
+    &.--pos-top{
+        grid-template-rows: auto 8px;
+        grid-template-areas: "tt-content" "tt-arrow";
+    }
+    &.--pos-bottom{
+        grid-template-rows: 8px auto;
+        grid-template-areas: "tt-arrow" "tt-content";
+    }
+    justify-content: center;
+    .text-content{
+        grid-area: tt-content;
+        width: auto;
+        background-color: var(--bg-color);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border-radius: 12px;
+    }
+    .arrow{
+        width: 40px;
+        height: 40px;
+        justify-self: center;
+        grid-area: tt-arrow;
+        --arrow-size: 8px;
+        &.--arrow-up {
+            width: 0; 
+            height: 0; 
+            border-left: var(--arrow-size) solid transparent;
+            border-right: var(--arrow-size) solid transparent;
+            
+            border-bottom: var(--arrow-size) solid var(--bg-color);
+          }
+          
+          &.--arrow-down {
+            width: 0; 
+            height: 0; 
+            border-left: var(--arrow-size) solid transparent;
+            border-right: var(--arrow-size) solid transparent;
+            
+            border-top: var(--arrow-size) solid var(--bg-color);
+          }
+          
+          &.--arrow-right {
+            width: 0; 
+            height: 0; 
+            border-top: var(--arrow-size) solid transparent;
+            border-bottom: var(--arrow-size) solid transparent;
+            
+            border-left: var(--arrow-size) solid var(--bg-color);
+          }
+          
+          &.--arrow-left {
+            width: 0; 
+            height: 0; 
+            border-top: var(--arrow-size) solid transparent;
+            border-bottom: var(--arrow-size) solid transparent; 
+            
+            border-right:var(--arrow-size) solid var(--bg-color); 
+          }
+    }
+}

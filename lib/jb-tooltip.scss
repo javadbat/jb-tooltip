@@ -1,0 +1,43 @@
+.jb-tooltip-web-component{
+    position: relative;
+    .tooltip-wrapper{
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        width: max-content;
+        max-width: Min( calc(100vw - 64px), 320px) ;
+        // immediate pos is assigned and determined when default position is out of viewport
+        &.--pos-top, &.--pos-top-immediate{
+            bottom: 100%;
+        }
+        &.--pos-bottom , &.--pos-bottom-immediate{
+            top: 100%;
+        }
+        &.--pos-y-center{
+            bottom: 50%;
+            transform: translateY(-50%);
+        }
+        &.--pos-left , &.--pos-left-immediate{
+            right: 100%;
+        }
+        &.--pos-right, &.--pos-right-immediate{
+            left: 100%;
+        }
+        &.--pos-x-center{
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &.--show{
+            opacity: 1;
+            visibility: visible;
+        }
+        .tooltip-content{
+        }
+    }
+    .tooltip-trigger-wrapper{
+        .tooltip-trigger{
+            
+        }
+    }
+}

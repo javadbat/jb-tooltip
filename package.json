@@ -1,0 +1,30 @@
+{
+  "name": "jb-tooltip",
+  "description": "tooltip web component",
+  "type": "module",
+  "author": {
+		"name": "mohammad javad bathaei",
+		"email": "javadbat@gmail.com"
+	},
+  "keywords": [
+    "jb",
+    "jb-tooltip",
+    "tooltip",
+    "web component"
+  ],
+  "version": "1.0.0",
+  "bugs": "https://github.com/javadbat/jb-tooltip/issues",
+  "license": "MIT",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "lib/",
+    "dist/"
+  ],
+  "main": "index.js",
+  "types": "./dist/jb-ttoltip.d.ts",
+  "repository": {
+		"type": "git",
+		"url": "git@github.com:javadbat/jb-tooltip.git"
+  }
+}
