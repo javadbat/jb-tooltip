@@ -3,6 +3,7 @@
     --bg-color:#000000cf;
     display: grid;
     grid-template-columns: 1fr;
+    justify-content: center;
     &.--pos-top{
         grid-template-rows: auto 8px;
         grid-template-areas: "tt-content" "tt-arrow";
@@ -11,7 +12,6 @@
         grid-template-rows: 8px auto;
         grid-template-areas: "tt-arrow" "tt-content";
     }
-    justify-content: center;
     .text-content{
         grid-area: tt-content;
         width: auto;
