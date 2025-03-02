@@ -22,7 +22,7 @@
     "dist/"
   ],
   "main": "index.js",
-  "types": "./dist/jb-ttoltip.d.ts",
+  "types": "./dist/jb-tooltip.d.ts",
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-tooltip.git"
