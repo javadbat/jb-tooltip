@@ -1,6 +1,6 @@
 import HTML from './jb-tooltip.html';
 import CSS from './jb-tooltip.scss';
-import { Elements, TooltipXPosition, TooltipYPosition } from "./Types1";
+import { Elements, TooltipXPosition, TooltipYPosition } from "./types";
 export * from './jb-tooltip-message/jb-tooltip-message';
 export class JBTooltipWebComponent extends HTMLElement {
 
