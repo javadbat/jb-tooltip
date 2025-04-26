@@ -1,5 +1,5 @@
 import { JBTooltipWebComponent } from "../jb-tooltip";
-import { TooltipXPosition, TooltipYPosition } from "../Types";
+import { TooltipXPosition, TooltipYPosition } from "../Types1";
 import HTML from "./jb-tooltip-message.html";
 import CSS from "./jb-tooltip-message.scss";
 import { Elements } from "./types";
