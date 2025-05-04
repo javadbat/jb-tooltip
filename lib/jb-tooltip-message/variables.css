@@ -1,0 +1,3 @@
+:host{
+  --border-radius:var(--jb-border-radius-sm);
+}

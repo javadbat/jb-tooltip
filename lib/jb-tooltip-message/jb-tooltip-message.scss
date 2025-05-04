@@ -1,3 +1,5 @@
+@use './variables.css';
+
 .jb-tooltip-message-web-component{
     width: auto;
     --bg-color:#000000cf;
@@ -21,7 +23,7 @@
         justify-content: center;
         align-items: center;
         padding: 8px;
-        border-radius: 12px;
+        border-radius: var(--border-radius);
     }
     .arrow{
         width: 40px;
