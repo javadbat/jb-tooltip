@@ -1,5 +1,5 @@
-import HTML from './jb-tooltip.html';
 import CSS from './jb-tooltip.scss';
+import { renderHTML } from './render';
 import { Elements, TooltipXPosition, TooltipYPosition } from "./types";
 export * from './jb-tooltip-message/jb-tooltip-message';
 export class JBTooltipWebComponent extends HTMLElement {
@@ -133,7 +133,7 @@ export class JBTooltipWebComponent extends HTMLElement {
     const shadowRoot = this.attachShadow({
       mode: 'open'
     });
-    const html = `<style>${CSS}</style>` + '\n' + HTML;
+    const html = `<style>${CSS}</style>` + '\n' + renderHTML();
     const element = document.createElement('template');
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
