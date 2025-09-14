@@ -1,6 +1,7 @@
 import { JBTooltipWebComponent } from "../jb-tooltip";
 import { TooltipXPosition, TooltipYPosition } from "../types";
-import CSS from "./jb-tooltip-message.scss";
+import CSS from "./jb-tooltip-message.css";
+import VariablesCSS from "./variables.css";
 import { renderHTML } from "./render";
 import { Elements } from "./types";
 export class JBTooltipMessageWebComponent extends HTMLElement {
@@ -27,7 +28,7 @@ export class JBTooltipMessageWebComponent extends HTMLElement {
     const shadowRoot = this.attachShadow({
       mode: "open",
     });
-    const html = `<style>${CSS}</style>` + "\n" + renderHTML();
+    const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));

@@ -1,4 +1,4 @@
-import CSS from './jb-tooltip.scss';
+import CSS from './jb-tooltip.css';
 import { renderHTML } from './render';
 import { Elements, TooltipXPosition, TooltipYPosition } from "./types";
 export * from './jb-tooltip-message/jb-tooltip-message';

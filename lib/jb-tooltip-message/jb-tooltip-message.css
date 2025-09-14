@@ -1,5 +1,3 @@
-@use './variables.css';
-
 .jb-tooltip-message-web-component{
     width: auto;
     --bg-color:#000000cf;
