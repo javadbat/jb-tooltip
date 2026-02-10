@@ -1,3 +1,7 @@
+:host{
+    width: auto;
+    display: block;
+}
 .jb-tooltip-web-component{
     position: relative;
     .tooltip-wrapper{

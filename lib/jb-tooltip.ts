@@ -1,6 +1,6 @@
 import CSS from './jb-tooltip.css';
 import { renderHTML } from './render';
-import { Elements, TooltipXPosition, TooltipYPosition } from "./types";
+import type { Elements, TooltipXPosition, TooltipYPosition } from "./types";
 export * from './jb-tooltip-message/jb-tooltip-message';
 export class JBTooltipWebComponent extends HTMLElement {
 
@@ -17,7 +17,7 @@ export class JBTooltipWebComponent extends HTMLElement {
     } else {
       this.elements.tooltipWrapper.classList.remove('--show');
       this.#displayYPosition = this.yPosition;
-      //remove immediate class becuase they are temporary classes
+      //remove immediate class because they are temporary classes
       this.elements.tooltipWrapper.classList.remove('--pos-bottom-immediate');
       this.elements.tooltipWrapper.classList.remove('--pos-top-immediate');
       this.elements.tooltipWrapper.classList.remove('--pos-left-immediate');
@@ -115,7 +115,7 @@ export class JBTooltipWebComponent extends HTMLElement {
     this.initWebComponent();
   }
   connectedCallback() {
-    // standard web component event that called when all of dom is binded
+    // standard web component event that called when all of dom is bonded
     this.callOnLoadEvent();
     this.initProp();
     this.callOnInitEvent();
@@ -133,7 +133,7 @@ export class JBTooltipWebComponent extends HTMLElement {
     const shadowRoot = this.attachShadow({
       mode: 'open'
     });
-    const html = `<style>${CSS}</style>` + '\n' + renderHTML();
+    const html = `<style>${CSS}</style>\n${renderHTML()}`;
     const element = document.createElement('template');
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
@@ -144,7 +144,6 @@ export class JBTooltipWebComponent extends HTMLElement {
 
   }
   private registerEventListener() {
-    //this.elements.qrcodeWrapper.addEventListener('click', this.toggleisOpen.bind(this));
     this.elements.tooltipTriggerWrapper.addEventListener("mouseover", this.openTooltip.bind(this));
     this.elements.tooltipTriggerWrapper.addEventListener("mouseout", this.closeTooltip.bind(this));
   }
@@ -174,7 +173,7 @@ export class JBTooltipWebComponent extends HTMLElement {
   static get observedAttributes() {
     return ['y-position', 'x-position'];
   }
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     // do something when an attribute has changed
     this.onAttributeChange(name, newValue);
   }
@@ -198,7 +197,7 @@ export class JBTooltipWebComponent extends HTMLElement {
     }
 
     if (isOut.left) {
-      // Left side is out of viewoprt
+      // Left side is out of viewport
       this.displayXPosition = "right";
     }
 
