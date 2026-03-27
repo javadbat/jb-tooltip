@@ -122,16 +122,18 @@ export class JBTooltipWebComponent extends HTMLElement {
 
   }
   private callOnLoadEvent() {
-    const event = new CustomEvent('load', { bubbles: true, composed: true });
+    const event = new CustomEvent('load', { bubbles: true, composed: false });
     this.dispatchEvent(event);
   }
   private callOnInitEvent() {
-    const event = new CustomEvent('init', { bubbles: true, composed: true });
+    const event = new CustomEvent('init', { bubbles: true, composed: false });
     this.dispatchEvent(event);
   }
   private initWebComponent() {
     const shadowRoot = this.attachShadow({
-      mode: 'open'
+      mode: 'open',
+      clonable:true,
+      serializable:true
     });
     const html = `<style>${CSS}</style>\n${renderHTML()}`;
     const element = document.createElement('template');

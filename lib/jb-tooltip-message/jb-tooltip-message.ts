@@ -1,9 +1,9 @@
-import { JBTooltipWebComponent } from "../jb-tooltip";
-import { TooltipXPosition, TooltipYPosition } from "../types";
+import type { JBTooltipWebComponent } from "../jb-tooltip";
+import type { TooltipXPosition, TooltipYPosition } from "../types";
 import CSS from "./jb-tooltip-message.css";
 import VariablesCSS from "./variables.css";
 import { renderHTML } from "./render";
-import { Elements } from "./types";
+import type { Elements } from "./types";
 export class JBTooltipMessageWebComponent extends HTMLElement {
   #elements!: Elements;
   constructor() {
@@ -11,7 +11,7 @@ export class JBTooltipMessageWebComponent extends HTMLElement {
     this.initWebComponent();
   }
   connectedCallback() {
-    // standard web component event that called when all of dom is binded
+    // standard web component event that called when all of dom is bounded
     this.callOnLoadEvent();
     this.initProp();
     this.callOnInitEvent();
@@ -27,6 +27,8 @@ export class JBTooltipMessageWebComponent extends HTMLElement {
   private initWebComponent() {
     const shadowRoot = this.attachShadow({
       mode: "open",
+      clonable:true,
+      serializable:true
     });
     const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
