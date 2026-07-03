@@ -5,11 +5,11 @@
     grid-template-columns: 1fr;
     justify-content: center;
     &.--pos-top{
-        grid-template-rows: auto 8px;
+        grid-template-rows: auto 0.5rem;
         grid-template-areas: "tt-content" "tt-arrow";
     }
     &.--pos-bottom{
-        grid-template-rows: 8px auto;
+        grid-template-rows: 0.5rem auto;
         grid-template-areas: "tt-arrow" "tt-content";
     }
     .text-content{
@@ -20,15 +20,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 8px;
+        padding: 0.5rem;
         border-radius: var(--border-radius);
     }
     .arrow{
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;
+        height: 2.5rem;
         justify-self: center;
         grid-area: tt-arrow;
-        --arrow-size: 8px;
+        --arrow-size: 0.5rem;
         &.--arrow-up {
             width: 0; 
             height: 0; 

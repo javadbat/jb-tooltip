@@ -10,7 +10,7 @@
         opacity: 0;
         visibility: hidden;
         width: max-content;
-        max-width: Min( calc(100vw - 64px), 320px) ;
+        max-width: Min( calc(100vw - 4rem), 20rem) ;
         /* immediate pos is assigned and determined when default position is out of viewport*/
         &.--pos-top, &.--pos-top-immediate{
             bottom: 100%;
