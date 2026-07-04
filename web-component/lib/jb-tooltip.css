@@ -6,11 +6,11 @@
     position: relative;
     .tooltip-wrapper{
         position: absolute;
-        z-index: 1;
+        z-index: var(--tooltip-z-index);
         opacity: 0;
         visibility: hidden;
         width: max-content;
-        max-width: Min( calc(100vw - 4rem), 20rem) ;
+        max-width: var(--tooltip-max-width);
         /* immediate pos is assigned and determined when default position is out of viewport*/
         &.--pos-top, &.--pos-top-immediate{
             bottom: 100%;

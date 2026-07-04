@@ -1,4 +1,5 @@
 import CSS from './jb-tooltip.css';
+import VariablesCSS from './variables.css';
 import { renderHTML } from './render';
 import type { Elements, TooltipXPosition, TooltipYPosition } from "./types";
 export * from './jb-tooltip-message/jb-tooltip-message';
@@ -135,7 +136,7 @@ export class JBTooltipWebComponent extends HTMLElement {
       clonable:true,
       serializable:true
     });
-    const html = `<style>${CSS}</style>\n${renderHTML()}`;
+    const html = `<style>${VariablesCSS} ${CSS}</style>\n${renderHTML()}`;
     const element = document.createElement('template');
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
