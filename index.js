@@ -1,1 +1,1 @@
-import './dist/jb-tooltip.js';
+import './web-component/dist/jb-tooltip.js';

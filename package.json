@@ -18,11 +18,11 @@
   "files": [
     "LICENSE",
     "README.md",
-    "lib/",
-    "dist/"
+    "web-component/lib/",
+    "web-component/dist/"
   ],
   "main": "index.js",
-  "types": "./dist/jb-tooltip.d.ts",
+  "types": "./web-component/dist/jb-tooltip.d.ts",
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-tooltip.git"

@@ -3,8 +3,9 @@ import type { ReactComponentBuildConfig, WebComponentBuildConfig } from "../../t
 export const webComponentList: WebComponentBuildConfig[] = [
   {
     name: "jb-tooltip",
-    path: "./lib/jb-tooltip.ts",
-    outputPath: "./dist/jb-tooltip.js",
+    path: "./web-component/lib/jb-tooltip.ts",
+    outputPath: "./web-component/dist/jb-tooltip.js",
+    tsConfigPath: "./web-component/tsconfig.json",
     umdName: "JBTooltip",
   },
 ];
