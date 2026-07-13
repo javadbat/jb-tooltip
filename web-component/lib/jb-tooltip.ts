@@ -12,6 +12,7 @@ export class JBTooltipWebComponent extends HTMLElement {
   }
   set isOpen(value: boolean) {
     this.#isOpen = value;
+    this.elements.tooltipWrapper.setAttribute("aria-hidden", value ? "false" : "true");
     this.#handleForOverflow();
     if (value) {
       this.elements.tooltipWrapper.classList.add('--show');
