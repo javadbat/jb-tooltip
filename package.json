@@ -23,6 +23,13 @@
   ],
   "main": "index.js",
   "types": "./web-component/dist/jb-tooltip.d.ts",
+  "exports": {
+    ".": {
+      "types": "./web-component/dist/jb-tooltip.d.ts",
+      "default": "./index.js"
+    },
+    "./*": "./*"
+  },
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-tooltip.git"
