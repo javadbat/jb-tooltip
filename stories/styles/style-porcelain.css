@@ -1,0 +1,12 @@
+jb-tooltip.porcelain-style {
+  --jb-tooltip-bg-color: #fff;
+  --jb-tooltip-text-color: #26364a;
+  --jb-tooltip-border-radius: 0.625rem;
+  --jb-tooltip-padding: 0.625rem 0.875rem;
+  --jb-tooltip-tail-border-color: #cbd7e4;
+}
+
+jb-tooltip.porcelain-style::part(message) {
+  border: 1px solid #cbd7e4;
+  box-shadow: 0 0.625rem 1.5rem rgb(51 65 85 / 16%);
+}

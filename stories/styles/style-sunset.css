@@ -1,0 +1,13 @@
+jb-tooltip.sunset-style {
+  --jb-tooltip-bg-color: #6f2d55;
+  --jb-tooltip-text-color: #fff7ed;
+  --jb-tooltip-border-radius: 0.75rem;
+  --jb-tooltip-padding: 0.625rem 0.875rem;
+  --jb-tooltip-tail-border-color: rgb(255 193 120 / 65%);
+}
+
+jb-tooltip.sunset-style::part(message) {
+  border: 1px solid rgb(255 193 120 / 65%);
+  background-image: linear-gradient(135deg, #8b315c, #c75b4d);
+  box-shadow: 0 0.75rem 1.75rem rgb(111 45 85 / 30%);
+}

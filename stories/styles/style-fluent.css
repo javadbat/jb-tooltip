@@ -1,0 +1,14 @@
+jb-tooltip.fluent-style {
+  --jb-tooltip-bg-color: #292929;
+  --jb-tooltip-text-color: #fff;
+  --jb-tooltip-border-radius: 0.25rem;
+  --jb-tooltip-padding: 0.5rem 0.75rem;
+  --jb-tooltip-tail-border-color: rgb(255 255 255 / 8%);
+}
+
+jb-tooltip.fluent-style::part(message) {
+  border: 1px solid rgb(255 255 255 / 8%);
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 24%);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+}

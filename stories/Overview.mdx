@@ -1,0 +1,48 @@
+import { Controls, Meta, Source, Stories, Story, Title } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './JBTooltip.stories';
+import * as MessageStories from './JBTooltipMessage.stories';
+
+<Meta of={TooltipStories} />
+
+<Title>JB Tooltip</Title>
+
+Standards-based tooltip for short, non-interactive descriptions. It uses the browser Popover API and CSS anchor positioning while leaving the trigger's layout unchanged.
+
+<Story of={TooltipStories.BasicText} />
+<Controls of={TooltipStories.BasicText} />
+<Source of={TooltipStories.BasicText} />
+
+## Optional tail
+
+Add `tail` when the tooltip should visually point to its trigger. It follows native fallback placement automatically.
+
+<Story of={TooltipStories.WithTail} />
+
+## Message sizes
+
+The standard `jb-tooltip-message` supports `xs`, `sm`, `md`, `lg`, and `xl`. Padding, typography, radius, and tail size scale together.
+
+<Story of={MessageStories.Sizes} />
+
+## Rich and custom content
+
+Use `jb-tooltip-message` for the design-system presentation, or assign any presentation element to the `content` slot.
+
+<Story of={TooltipStories.RichContent} />
+<Story of={TooltipStories.CustomContent} />
+
+## Placement
+
+`position-area` accepts native CSS anchor-positioning values. The tooltip defaults to `top` and can flip when space is constrained.
+
+<Story of={TooltipStories.Positions} />
+
+### Native fallback placement
+
+The fallback story places triggers against viewport edges and verifies that `flip-block` and `flip-inline` move both the tooltip and its tail to the available side.
+
+<Story of={TooltipStories.FallbackPositions} />
+
+## Examples and interaction tests
+
+<Stories />

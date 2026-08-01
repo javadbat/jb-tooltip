@@ -1,0 +1,112 @@
+import { Meta, Source, Story, Title } from '@storybook/addon-docs/blocks';
+import * as StyleStories from './Styles.stories';
+import antDesignCss from './styles/style-ant-design.css?raw';
+import auroraCss from './styles/style-aurora.css?raw';
+import bootstrapCss from './styles/style-bootstrap.css?raw';
+import candyCss from './styles/style-candy.css?raw';
+import carbonCss from './styles/style-carbon.css?raw';
+import cupertinoCss from './styles/style-cupertino.css?raw';
+import fluentCss from './styles/style-fluent.css?raw';
+import forestCss from './styles/style-forest.css?raw';
+import materialCss from './styles/style-material.css?raw';
+import porcelainCss from './styles/style-porcelain.css?raw';
+import sunsetCss from './styles/style-sunset.css?raw';
+import terminalCss from './styles/style-terminal.css?raw';
+
+<Meta title="Components/JBTooltip/Styling" />
+
+<Title>Tooltip styling</Title>
+
+`JBTooltip` exposes variables for the standard message and CSS parts for structural customization. The examples below share the same markup and alter only the public styling API.
+
+## Live gallery
+
+Hover or focus any trigger to inspect its theme. Native `popover="hint"` behavior keeps one tooltip open at a time.
+
+<Story of={StyleStories.Gallery} />
+
+## Recommended customization
+
+1. Set `--jb-tooltip-*` variables for spacing, width, colors, radius, and the optional tail.
+2. Use `jb-tooltip::part(message)` for borders, shadows, typography, gradients, and backdrop effects.
+3. Use `jb-tooltip::part(tooltip)` only when the native popover surface itself needs styling.
+4. Use `jb-tooltip::part(content)` for layout around custom or slotted content.
+
+```css
+jb-tooltip.brand-tooltip {
+  --jb-tooltip-bg-color: #172033;
+  --jb-tooltip-text-color: #fff;
+  --jb-tooltip-border-radius: 0.5rem;
+  --jb-tooltip-padding: 0.625rem 0.875rem;
+  --jb-tooltip-tail-bg-color: #172033;
+  --jb-tooltip-tail-border-color: #40506b;
+  --jb-tooltip-tail-border-width: 1px;
+}
+
+jb-tooltip.brand-tooltip::part(message) {
+  border: 1px solid #40506b;
+  box-shadow: 0 0.75rem 1.5rem rgb(15 23 42 / 20%);
+}
+```
+
+## Style recipes
+
+### Carbon
+
+<Story of={StyleStories.Carbon} />
+<Source code={carbonCss} language="css" />
+
+### Aurora
+
+<Story of={StyleStories.Aurora} />
+<Source code={auroraCss} language="css" />
+
+### Forest
+
+<Story of={StyleStories.Forest} />
+<Source code={forestCss} language="css" />
+
+### Sunset
+
+<Story of={StyleStories.Sunset} />
+<Source code={sunsetCss} language="css" />
+
+### Porcelain
+
+<Story of={StyleStories.Porcelain} />
+<Source code={porcelainCss} language="css" />
+
+### Candy
+
+<Story of={StyleStories.Candy} />
+<Source code={candyCss} language="css" />
+
+### Terminal
+
+<Story of={StyleStories.Terminal} />
+<Source code={terminalCss} language="css" />
+
+### Material
+
+<Story of={StyleStories.Material} />
+<Source code={materialCss} language="css" />
+
+### Fluent
+
+<Story of={StyleStories.Fluent} />
+<Source code={fluentCss} language="css" />
+
+### Bootstrap
+
+<Story of={StyleStories.Bootstrap} />
+<Source code={bootstrapCss} language="css" />
+
+### Cupertino
+
+<Story of={StyleStories.Cupertino} />
+<Source code={cupertinoCss} language="css" />
+
+### Ant Design
+
+<Story of={StyleStories.AntDesign} />
+<Source code={antDesignCss} language="css" />

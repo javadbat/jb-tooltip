@@ -1,0 +1,13 @@
+jb-tooltip.carbon-style {
+  --jb-tooltip-bg-color: #262626;
+  --jb-tooltip-text-color: #f4f4f4;
+  --jb-tooltip-border-radius: 0;
+  --jb-tooltip-padding: 0.625rem 0.75rem;
+  --jb-tooltip-tail-border-color: #525252;
+}
+
+jb-tooltip.carbon-style::part(message) {
+  border: 1px solid #525252;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 35%);
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+}

@@ -1,0 +1,16 @@
+jb-tooltip.cupertino-style {
+  --jb-tooltip-bg-color: rgb(28 28 30 / 90%);
+  --jb-tooltip-text-color: #fff;
+  --jb-tooltip-border-radius: 0.625rem;
+  --jb-tooltip-padding: 0.5rem 0.75rem;
+  --jb-tooltip-tail-border-color: rgb(255 255 255 / 16%);
+  --jb-tooltip-tail-border-width: 0.5px;
+}
+
+jb-tooltip.cupertino-style::part(message) {
+  border: 0.5px solid rgb(255 255 255 / 16%);
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 22%);
+  backdrop-filter: blur(1.25rem) saturate(160%);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.8125rem;
+}

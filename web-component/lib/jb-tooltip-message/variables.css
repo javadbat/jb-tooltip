@@ -1,3 +1,44 @@
-:host{
-  --border-radius:var(--jb-border-radius-sm);
+:host {
+  /* Size */
+  --message-padding: var(--jb-tooltip-padding, var(--jb-tooltip-padding-md, 0.5rem 0.75rem));
+  --message-font-size: var(--jb-tooltip-font-size, var(--jb-tooltip-font-size-md, 0.875rem));
+  --message-border-radius: var(--jb-tooltip-border-radius, var(--jb-tooltip-border-radius-md, var(--jb-radius-sm)));
+  --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-md, 0.375rem));
+  /* Theme/Color */
+  --message-bg-color: var(--jb-tooltip-bg-color, var(--jb-surface, #fff));
+  --message-text-color: var(--jb-tooltip-text-color, var(--jb-text-primary, #1f2937));
+  --message-border: var(--jb-tooltip-border, 1px solid var(--jb-border-color, #d0d5dd));
+  --message-box-shadow: var(--jb-tooltip-box-shadow, 0 0.375rem 1rem rgb(15 23 42 / 14%));
+  --message-tail-bg-color: var(--jb-tooltip-tail-bg-color, var(--message-bg-color));
+  --message-tail-border-color: var(--jb-tooltip-tail-border-color, var(--jb-border-color, #d0d5dd));
+  --message-tail-border-width: var(--jb-tooltip-tail-border-width, 1px);
+  --message-tail-display: var(--jb-tooltip-message-tail-display, none);
+}
+
+:host([size="xs"]) {
+  --message-padding: var(--jb-tooltip-padding, var(--jb-tooltip-padding-xs, 0.25rem 0.375rem));
+  --message-font-size: var(--jb-tooltip-font-size, var(--jb-tooltip-font-size-xs, 0.6875rem));
+  --message-border-radius: var(--jb-tooltip-border-radius, var(--jb-tooltip-border-radius-xs, var(--jb-radius-xs)));
+  --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-xs, 0.25rem));
+}
+
+:host([size="sm"]) {
+  --message-padding: var(--jb-tooltip-padding, var(--jb-tooltip-padding-sm, 0.375rem 0.5rem));
+  --message-font-size: var(--jb-tooltip-font-size, var(--jb-tooltip-font-size-sm, 0.75rem));
+  --message-border-radius: var(--jb-tooltip-border-radius, var(--jb-tooltip-border-radius-sm, var(--jb-radius-xs)));
+  --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-sm, 0.3125rem));
+}
+
+:host([size="lg"]) {
+  --message-padding: var(--jb-tooltip-padding, var(--jb-tooltip-padding-lg, 0.625rem 1rem));
+  --message-font-size: var(--jb-tooltip-font-size, var(--jb-tooltip-font-size-lg, 1rem));
+  --message-border-radius: var(--jb-tooltip-border-radius, var(--jb-tooltip-border-radius-lg, var(--jb-radius)));
+  --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-lg, 0.4375rem));
+}
+
+:host([size="xl"]) {
+  --message-padding: var(--jb-tooltip-padding, var(--jb-tooltip-padding-xl, 0.75rem 1.125rem));
+  --message-font-size: var(--jb-tooltip-font-size, var(--jb-tooltip-font-size-xl, 1.125rem));
+  --message-border-radius: var(--jb-tooltip-border-radius, var(--jb-tooltip-border-radius-xl, var(--jb-radius-lg)));
+  --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-xl, 0.5rem));
 }

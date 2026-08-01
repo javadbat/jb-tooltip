@@ -1,0 +1,15 @@
+jb-tooltip.candy-style {
+  --jb-tooltip-bg-color: #fff0fa;
+  --jb-tooltip-text-color: #6d245c;
+  --jb-tooltip-border-radius: 999px;
+  --jb-tooltip-padding: 0.625rem 1rem;
+  --jb-tooltip-tail-border-color: #f394d2;
+  --jb-tooltip-tail-border-width: 2px;
+}
+
+jb-tooltip.candy-style::part(message) {
+  border: 2px solid #f394d2;
+  background-image: linear-gradient(135deg, #fff5fb, #f4e8ff);
+  box-shadow: 0 0.625rem 1.5rem rgb(190 66 160 / 22%);
+  font-weight: 700;
+}

@@ -3,9 +3,9 @@
   "description": "tooltip web component",
   "type": "module",
   "author": {
-		"name": "mohammad javad bathaei",
-		"email": "javadbat@gmail.com"
-	},
+    "name": "mohammad javad bathaei",
+    "email": "javadbat@gmail.com"
+  },
   "keywords": [
     "jb",
     "jb-tooltip",
@@ -31,7 +31,10 @@
     "./*": "./*"
   },
   "repository": {
-		"type": "git",
-		"url": "git@github.com:javadbat/jb-tooltip.git"
+    "type": "git",
+    "url": "git@github.com:javadbat/jb-tooltip.git"
+  },
+  "dependencies": {
+    "jb-core": "^0.30.0"
   }
 }

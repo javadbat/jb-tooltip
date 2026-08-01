@@ -1,68 +1,102 @@
-.jb-tooltip-message-web-component{
-    width: auto;
-    --bg-color:#000000cf;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    &.--pos-top{
-        grid-template-rows: auto 0.5rem;
-        grid-template-areas: "tt-content" "tt-arrow";
-    }
-    &.--pos-bottom{
-        grid-template-rows: 0.5rem auto;
-        grid-template-areas: "tt-arrow" "tt-content";
-    }
-    .text-content{
-        grid-area: tt-content;
-        width: auto;
-        background-color: var(--bg-color);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.5rem;
-        border-radius: var(--border-radius);
-    }
-    .arrow{
-        width: 2.5rem;
-        height: 2.5rem;
-        justify-self: center;
-        grid-area: tt-arrow;
-        --arrow-size: 0.5rem;
-        &.--arrow-up {
-            width: 0; 
-            height: 0; 
-            border-left: var(--arrow-size) solid transparent;
-            border-right: var(--arrow-size) solid transparent;
-            
-            border-bottom: var(--arrow-size) solid var(--bg-color);
-          }
-          
-          &.--arrow-down {
-            width: 0; 
-            height: 0; 
-            border-left: var(--arrow-size) solid transparent;
-            border-right: var(--arrow-size) solid transparent;
-            
-            border-top: var(--arrow-size) solid var(--bg-color);
-          }
-          
-          &.--arrow-right {
-            width: 0; 
-            height: 0; 
-            border-top: var(--arrow-size) solid transparent;
-            border-bottom: var(--arrow-size) solid transparent;
-            
-            border-left: var(--arrow-size) solid var(--bg-color);
-          }
-          
-          &.--arrow-left {
-            width: 0; 
-            height: 0; 
-            border-top: var(--arrow-size) solid transparent;
-            border-bottom: var(--arrow-size) solid transparent; 
-            
-            border-right:var(--arrow-size) solid var(--bg-color); 
-          }
-    }
+:host {
+  display: block;
+}
+
+.jb-tooltip-message-web-component {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  padding: var(--message-padding);
+  border: var(--message-border);
+  color: var(--message-text-color);
+  background-color: var(--message-bg-color);
+  border-radius: var(--message-border-radius);
+  box-shadow: var(--message-box-shadow);
+  font-size: var(--message-font-size);
+  line-height: 1.4;
+}
+
+.tooltip-tail {
+  position: absolute;
+  z-index: 0;
+  display: var(--message-tail-display);
+  background: var(--message-tail-border-color);
+  pointer-events: none;
+}
+
+.tooltip-tail::after {
+  position: absolute;
+  content: "";
+  background: var(--message-tail-bg-color);
+  clip-path: inherit;
+}
+
+:host([tail]) .tooltip-tail {
+  display: block;
+}
+
+:host([data-placement="top"]) .tooltip-tail,
+:host([data-placement="bottom"]) .tooltip-tail {
+  left: var(--tooltip-tail-offset, 50%);
+  width: calc(var(--message-tail-size) * 2);
+  height: var(--message-tail-size);
+  transform: translateX(-50%);
+}
+
+:host([data-placement="top"]) .tooltip-tail {
+  bottom: calc(1px - var(--message-tail-size));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+:host([data-placement="top"]) .tooltip-tail::after,
+:host([data-placement="bottom"]) .tooltip-tail::after {
+  left: var(--message-tail-border-width);
+  width: calc((var(--message-tail-size) - var(--message-tail-border-width)) * 2);
+  height: calc(var(--message-tail-size) - var(--message-tail-border-width));
+}
+
+:host([data-placement="top"]) .tooltip-tail::after {
+  top: 0;
+}
+
+:host([data-placement="bottom"]) .tooltip-tail {
+  top: calc(1px - var(--message-tail-size));
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+:host([data-placement="bottom"]) .tooltip-tail::after {
+  bottom: 0;
+}
+
+:host([data-placement="left"]) .tooltip-tail,
+:host([data-placement="right"]) .tooltip-tail {
+  top: var(--tooltip-tail-offset, 50%);
+  width: var(--message-tail-size);
+  height: calc(var(--message-tail-size) * 2);
+  transform: translateY(-50%);
+}
+
+:host([data-placement="left"]) .tooltip-tail {
+  right: calc(1px - var(--message-tail-size));
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+:host([data-placement="left"]) .tooltip-tail::after,
+:host([data-placement="right"]) .tooltip-tail::after {
+  top: var(--message-tail-border-width);
+  width: calc(var(--message-tail-size) - var(--message-tail-border-width));
+  height: calc((var(--message-tail-size) - var(--message-tail-border-width)) * 2);
+}
+
+:host([data-placement="left"]) .tooltip-tail::after {
+  left: 0;
+}
+
+:host([data-placement="right"]) .tooltip-tail {
+  left: calc(1px - var(--message-tail-size));
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+:host([data-placement="right"]) .tooltip-tail::after {
+  right: 0;
 }

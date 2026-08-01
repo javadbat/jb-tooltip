@@ -1,0 +1,15 @@
+jb-tooltip.material-style {
+  --jb-tooltip-bg-color: #313033;
+  --jb-tooltip-text-color: #f4eff4;
+  --jb-tooltip-border-radius: 0.25rem;
+  --jb-tooltip-padding: 0.5rem 0.75rem;
+  --jb-tooltip-tail-border-color: var(--jb-outline-variant);
+}
+
+jb-tooltip.material-style::part(message) {
+  box-shadow: var(--jb-elevation-2, 0 0.25rem 0.75rem rgb(0 0 0 / 24%));
+  font-family: Roboto, "Noto Sans", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}

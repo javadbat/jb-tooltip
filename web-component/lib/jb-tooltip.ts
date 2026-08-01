@@ -1,238 +1,447 @@
-import CSS from './jb-tooltip.css';
-import VariablesCSS from './variables.css';
-import { renderHTML } from './render';
-import type { Elements, TooltipXPosition, TooltipYPosition } from "./types";
-export * from './jb-tooltip-message/jb-tooltip-message';
-export class JBTooltipWebComponent extends HTMLElement {
+import { registerDefaultVariables } from "jb-core/theme";
+import { parseBooleanAttribute } from "jb-core";
+import CSS from "./jb-tooltip.css";
+import "./jb-tooltip-message/jb-tooltip-message.js";
+import { renderHTML } from "./render.js";
+import type { ElementsObject } from "./types.js";
+import VariablesCSS from "./variables.css";
+export * from "./jb-tooltip-message/jb-tooltip-message.js";
+export * from "./types.js";
 
-  elements!: Elements;
-  #isOpen = false;
-  get isOpen() {
-    return this.#isOpen;
+const HIDE_DELAY = 100;
+const TAIL_EDGE_PADDING = 8;
+
+type ResolvedPlacement = "top" | "right" | "bottom" | "left";
+
+export class JBTooltipWebComponent extends HTMLElement {
+  elements!: ElementsObject;
+  #internals!: ElementInternals;
+  #eventController?: AbortController;
+  #triggerEventController?: AbortController;
+  #trigger: HTMLElement | null = null;
+  #pointerOverTrigger = false;
+  #pointerOverTooltip = false;
+  #triggerFocused = false;
+  #tooltipFocused = false;
+  #hideTimeout?: number;
+  #tailPositionFrame?: number;
+  #tailResizeObserver?: ResizeObserver;
+  #managedDescription?: { trigger: HTMLElement; value: string };
+
+  static get observedAttributes() {
+    return ["content", "position-area", "position-try-fallbacks", "tail"];
   }
-  set isOpen(value: boolean) {
-    this.#isOpen = value;
-    this.elements.tooltipWrapper.setAttribute("aria-hidden", value ? "false" : "true");
-    this.#handleForOverflow();
+
+  get content(): string {
+    return this.getAttribute("content") ?? "";
+  }
+
+  set content(value: string) {
     if (value) {
-      this.elements.tooltipWrapper.classList.add('--show');
+      this.setAttribute("content", value);
     } else {
-      this.elements.tooltipWrapper.classList.remove('--show');
-      this.#displayYPosition = this.yPosition;
-      //remove immediate class because they are temporary classes
-      this.elements.tooltipWrapper.classList.remove('--pos-bottom-immediate');
-      this.elements.tooltipWrapper.classList.remove('--pos-top-immediate');
-      this.elements.tooltipWrapper.classList.remove('--pos-left-immediate');
-      this.elements.tooltipWrapper.classList.remove('--pos-right-immediate');
+      this.removeAttribute("content");
     }
   }
-  #yPosition: TooltipYPosition = 'top';
-  set yPosition(value: TooltipYPosition) {
-    this.elements.tooltipWrapper.classList.remove('--pos-top');
-    this.elements.tooltipWrapper.classList.remove('--pos-bottom');
-    this.elements.tooltipWrapper.classList.remove('--pos-y-center');
-    switch (value) {
-      case 'top':
-        this.elements.tooltipWrapper.classList.add('--pos-top');
-        break;
-      case 'bottom':
-        this.elements.tooltipWrapper.classList.add('--pos-bottom');
-        break;
-      case 'center':
-        this.elements.tooltipWrapper.classList.add('--pos-y-center');
-        break;
+
+  get positionArea(): string {
+    return this.getAttribute("position-area")?.trim() || "top";
+  }
+
+  set positionArea(value: string) {
+    if (value.trim()) {
+      this.setAttribute("position-area", value);
+    } else {
+      this.removeAttribute("position-area");
     }
-    this.#yPosition = value;
-    this.displayYPosition = value;
   }
-  get yPosition() {
-    return this.#yPosition;
+
+  get positionTryFallbacks(): string {
+    return this.getAttribute("position-try-fallbacks")?.trim() || "flip-block, flip-inline";
   }
-  #displayYPosition: TooltipYPosition = 'top';
-  get displayYPosition() {
-    return this.#displayYPosition;
-  }
-  set displayYPosition(value: TooltipYPosition) {
-    this.elements.tooltipWrapper.classList.remove('--pos-top-immediate');
-    this.elements.tooltipWrapper.classList.remove('--pos-bottom-immediate');
-    this.elements.tooltipWrapper.classList.remove('--pos-x-center');
-    switch (value) {
-      case 'top':
-        this.elements.tooltipWrapper.classList.add('--pos-top-immediate');
-        break;
-      case 'bottom':
-        this.elements.tooltipWrapper.classList.add('--pos-bottom-immediate');
-        break;
-      case 'center':
-        this.elements.tooltipWrapper.classList.add('--pos-x-center');
-        break;
+
+  set positionTryFallbacks(value: string) {
+    if (value.trim()) {
+      this.setAttribute("position-try-fallbacks", value);
+    } else {
+      this.removeAttribute("position-try-fallbacks");
     }
-    this.#displayYPosition = value;
   }
-  #xPosition: TooltipXPosition = 'center';
-  get xPosition(): TooltipXPosition {
-    return this.#xPosition;
+
+  get tail(): boolean {
+    return parseBooleanAttribute(this.getAttribute("tail"));
   }
-  set xPosition(value: TooltipXPosition) {
-    this.elements.tooltipWrapper.classList.remove('--pos-left');
-    this.elements.tooltipWrapper.classList.remove('--pos-right');
-    this.elements.tooltipWrapper.classList.remove('--pos-x-center');
-    switch (value) {
-      case 'left':
-        this.elements.tooltipWrapper.classList.add('--pos-left');
-        break;
-      case 'right':
-        this.elements.tooltipWrapper.classList.add('--pos-right');
-        break;
-      case 'center':
-        this.elements.tooltipWrapper.classList.add('--pos-x-center');
-        break;
-    }
-    this.#xPosition = value;
+
+  set tail(value: boolean) {
+    this.toggleAttribute("tail", value);
   }
-  #displayXPosition: TooltipXPosition = 'center';
-  get displayXPosition() {
-    return this.#displayXPosition;
-  }
-  set displayXPosition(value: TooltipXPosition) {
-    this.elements.tooltipWrapper.classList.remove('--pos-left-immediate');
-    this.elements.tooltipWrapper.classList.remove('--pos-right-immediate');
-    this.elements.tooltipWrapper.classList.remove('--pos-center');
-    switch (value) {
-      case 'left':
-        this.elements.tooltipWrapper.classList.add('--pos-left-immediate');
-        break;
-      case 'right':
-        this.elements.tooltipWrapper.classList.add('--pos-right-immediate');
-        break;
-      case 'center':
-        this.elements.tooltipWrapper.classList.add('--pos-center');
-        break;
-    }
-    this.#displayXPosition = value;
+
+  get open(): boolean {
+    return this.elements.tooltip.matches(":popover-open");
   }
 
   constructor() {
     super();
-    this.initWebComponent();
+    this.#initWebComponent();
   }
+
   connectedCallback() {
-    // standard web component event that called when all of dom is bonded
-    this.callOnLoadEvent();
-    this.initProp();
-    this.callOnInitEvent();
+    this.#registerEventListeners();
+    this.#updateTrigger();
+    this.#updateContent();
+    this.#updatePosition();
+    this.#observeTailGeometry();
+  }
 
+  disconnectedCallback() {
+    this.#eventController?.abort();
+    this.#triggerEventController?.abort();
+    this.#tailResizeObserver?.disconnect();
+    this.#clearHideTimeout();
+    this.#clearTailPositionFrame();
+    this.#clearManagedDescription();
   }
-  private callOnLoadEvent() {
-    const event = new CustomEvent('load', { bubbles: true, composed: false });
-    this.dispatchEvent(event);
+
+  attributeChangedCallback(name: string, _oldValue: string | null, _newValue: string | null) {
+    if (name === "content") {
+      this.#updateContent();
+      return;
+    }
+    if (name === "tail") {
+      this.#scheduleTailPosition();
+      return;
+    }
+    this.#updatePosition();
   }
-  private callOnInitEvent() {
-    const event = new CustomEvent('init', { bubbles: true, composed: false });
-    this.dispatchEvent(event);
+
+  /** Opens the tooltip when it has a trigger and content. */
+  show() {
+    if (!this.isConnected || !this.#trigger || !this.#hasContent() || this.open) {
+      return;
+    }
+    this.#clearHideTimeout();
+    this.elements.tooltip.showPopover({ source: this.#trigger });
   }
-  private initWebComponent() {
+
+  /** Closes the tooltip. */
+  hide() {
+    this.#clearHideTimeout();
+    if (this.open) {
+      this.elements.tooltip.hidePopover();
+    }
+  }
+
+  /** Toggles the tooltip and returns its resulting open state. */
+  toggle(): boolean {
+    if (this.open) {
+      this.hide();
+    } else {
+      this.show();
+    }
+    return this.open;
+  }
+
+  #initWebComponent() {
     const shadowRoot = this.attachShadow({
-      mode: 'open',
-      clonable:true,
-      serializable:true
+      mode: "open",
+      clonable: true,
+      serializable: true,
     });
-    const html = `<style>${VariablesCSS} ${CSS}</style>\n${renderHTML()}`;
-    const element = document.createElement('template');
-    element.innerHTML = html;
-    shadowRoot.appendChild(element.content.cloneNode(true));
+    this.#internals = this.attachInternals();
+    registerDefaultVariables();
+    const template = document.createElement("template");
+    template.innerHTML = `<style>${VariablesCSS} ${CSS}</style>\n${renderHTML()}`;
+    shadowRoot.appendChild(template.content.cloneNode(true));
     this.elements = {
-      tooltipWrapper: shadowRoot.querySelector('.tooltip-wrapper')! as HTMLDivElement,
-      tooltipTriggerWrapper: shadowRoot.querySelector('.tooltip-trigger-wrapper')! as HTMLDivElement,
+      tooltip: shadowRoot.querySelector(".tooltip")!,
+      tooltipContent: shadowRoot.querySelector(".tooltip-content")!,
+      defaultMessage: shadowRoot.querySelector(".default-message")!,
+      triggerSlot: shadowRoot.querySelector("slot:not([name])")!,
+      contentSlot: shadowRoot.querySelector('slot[name="content"]')!,
+      fallbackContent: shadowRoot.querySelector(".fallback-content")!,
     };
+  }
 
+  #registerEventListeners() {
+    this.#eventController?.abort();
+    this.#eventController = new AbortController();
+    const { signal } = this.#eventController;
+    this.elements.triggerSlot.addEventListener("slotchange", this.#updateTrigger, { signal });
+    this.elements.contentSlot.addEventListener("slotchange", this.#updateContent, { signal });
+    this.elements.tooltip.addEventListener("pointerenter", this.#onTooltipPointerEnter, { signal });
+    this.elements.tooltip.addEventListener("pointerleave", this.#onTooltipPointerLeave, { signal });
+    this.elements.tooltip.addEventListener("focusin", this.#onTooltipFocusIn, { signal });
+    this.elements.tooltip.addEventListener("focusout", this.#onTooltipFocusOut, { signal });
+    this.elements.tooltip.addEventListener("beforetoggle", this.#onBeforeToggle, { signal });
+    this.elements.tooltip.addEventListener("toggle", this.#onToggle, { signal });
+    window.addEventListener("resize", this.#scheduleTailPosition, { signal });
+    window.addEventListener("scroll", this.#scheduleTailPosition, { capture: true, signal });
   }
-  private registerEventListener() {
-    this.elements.tooltipTriggerWrapper.addEventListener("mouseover", this.openTooltip.bind(this));
-    this.elements.tooltipTriggerWrapper.addEventListener("mouseout", this.closeTooltip.bind(this));
-  }
-  public openTooltip() {
-    this.isOpen = true;
-    this.#triggerOpenEvent();
-  }
-  public closeTooltip() {
-    this.isOpen = false;
-  }
-  public toggleisOpen() {
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) {
-      this.#triggerOpenEvent();
-    }
-  }
-  #triggerOpenEvent() {
-    const event = new CustomEvent('open', { bubbles: true, composed: true });
-    this.dispatchEvent(event);
-  }
-  private initProp() {
-    this.registerEventListener();
-    this.yPosition = this.getAttribute('y-position') as TooltipYPosition || 'top';
-    this.xPosition = this.getAttribute('x-position') as TooltipXPosition || 'center';
 
-  }
-  static get observedAttributes() {
-    return ['y-position', 'x-position'];
-  }
-  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
-    // do something when an attribute has changed
-    this.onAttributeChange(name, newValue);
-  }
-  private onAttributeChange(name: string, value: string) {
-    switch (name) {
-      case 'y-position':
-        this.yPosition = value as TooltipYPosition;
-        break;
-      case 'x-position':
-        this.xPosition = value as TooltipXPosition;
-        break;
+  #updateTrigger = () => {
+    const nextTrigger = this.elements.triggerSlot.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
+    if (nextTrigger === this.#trigger) {
+      this.#updateAccessibleDescription();
+      return;
     }
 
+    this.#triggerEventController?.abort();
+    this.#clearManagedDescription();
+    this.#trigger = nextTrigger ?? null;
+    this.#pointerOverTrigger = false;
+    this.#triggerFocused = false;
+
+    if (!this.#trigger) {
+      this.hide();
+      this.#observeTailGeometry();
+      return;
+    }
+
+    this.#triggerEventController = new AbortController();
+    const { signal } = this.#triggerEventController;
+    this.#trigger.addEventListener("pointerenter", this.#onTriggerPointerEnter, { signal });
+    this.#trigger.addEventListener("pointerleave", this.#onTriggerPointerLeave, { signal });
+    this.#trigger.addEventListener("focusin", this.#onTriggerFocusIn, { signal });
+    this.#trigger.addEventListener("focusout", this.#onTriggerFocusOut, { signal });
+    this.#observeTailGeometry();
+    this.#updateAccessibleDescription();
+  };
+
+  #updateContent = () => {
+    this.elements.fallbackContent.textContent = this.content;
+    this.#updateAccessibleDescription();
+    if (!this.#hasContent()) {
+      this.hide();
+    }
+    this.#scheduleTailPosition();
+  };
+
+  #hasContent(): boolean {
+    return this.elements.contentSlot.assignedElements({ flatten: true }).length > 0 || this.content.trim().length > 0;
   }
-  #handleForOverflow() {
-    const elem = this.elements.tooltipWrapper;
-    const isOut = this.#isOutOfViewport(elem);
 
-    if (this.yPosition == "top" && isOut.top) {
-      this.displayYPosition = "bottom";
+  #getContentText(): string {
+    const assignedContent = this.elements.contentSlot.assignedElements({ flatten: true });
+    if (assignedContent.length > 0) {
+      return assignedContent
+        .map(element => element.textContent?.trim())
+        .filter(Boolean)
+        .join(" ");
+    }
+    return this.content.trim();
+  }
+
+  #updateAccessibleDescription() {
+    const trigger = this.#trigger;
+    if (!trigger) {
+      return;
+    }
+    const description = this.#getContentText();
+    const managedDescription = this.#managedDescription;
+    const ariaDescription = trigger.getAttribute("aria-description");
+    const hasAuthoredDescription =
+      trigger.hasAttribute("aria-describedby") || (ariaDescription !== null && (managedDescription?.trigger !== trigger || ariaDescription !== managedDescription.value));
+
+    if (!description || hasAuthoredDescription) {
+      this.#clearManagedDescription();
+      return;
     }
 
-    if (isOut.left) {
-      // Left side is out of viewport
-      this.displayXPosition = "right";
-    }
+    trigger.setAttribute("aria-description", description);
+    this.#managedDescription = { trigger, value: description };
+  }
 
-    if (isOut.bottom) {
-      // Bottom is out of viewport
-      this.displayYPosition = "top";
+  #clearManagedDescription() {
+    const managedDescription = this.#managedDescription;
+    if (managedDescription && managedDescription.trigger.getAttribute("aria-description") === managedDescription.value) {
+      managedDescription.trigger.removeAttribute("aria-description");
     }
+    this.#managedDescription = undefined;
+  }
 
-    if (isOut.right) {
-      // Right side is out of viewport
-      this.displayXPosition = "left";
+  #updatePosition() {
+    if (!this.elements) {
+      return;
+    }
+    const positionArea = this.positionArea;
+    this.elements.tooltip.style.setProperty("position-area", positionArea);
+    this.elements.tooltip.style.setProperty("position-try-fallbacks", this.positionTryFallbacks);
+    this.#scheduleTailPosition();
+  }
+
+  #observeTailGeometry() {
+    if (!this.isConnected) {
+      return;
+    }
+    this.#tailResizeObserver ??= new ResizeObserver(this.#scheduleTailPosition);
+    this.#tailResizeObserver.disconnect();
+    this.#tailResizeObserver.observe(this.elements.tooltipContent);
+    if (this.#trigger) {
+      this.#tailResizeObserver.observe(this.#trigger);
     }
   }
-  #isOutOfViewport(elem: HTMLElement) {
 
-    // Get element's bounding
-    const bounding = elem.getBoundingClientRect();
+  #scheduleTailPosition = () => {
+    if (!this.open || this.#tailPositionFrame !== undefined) {
+      return;
+    }
+    this.#tailPositionFrame = window.requestAnimationFrame(() => {
+      this.#tailPositionFrame = undefined;
+      this.#updateTailPosition();
+    });
+  };
 
-    // Check if it's out of the viewport on each side
-    const out = { top: false, left: false, bottom: false, right: false, any: false, all: false };
-    out.top = bounding.top < 0;
-    out.left = bounding.left < 0;
-    out.bottom = bounding.bottom > (window.innerHeight || document.documentElement.clientHeight);
-    out.right = bounding.right > (window.innerWidth || document.documentElement.clientWidth);
-    out.any = out.top || out.left || out.bottom || out.right;
-    out.all = out.top && out.left && out.bottom && out.right;
+  #updateTailPosition() {
+    const trigger = this.#trigger;
+    const message = this.#getActiveTooltipMessage();
+    if (!trigger || !message || !this.open) {
+      return;
+    }
 
-    return out;
+    const triggerRect = trigger.getBoundingClientRect();
+    const contentRect = message.getBoundingClientRect();
+    const placement = this.#resolvePlacement(triggerRect, contentRect);
+    const triggerCenterX = triggerRect.left + triggerRect.width / 2;
+    const triggerCenterY = triggerRect.top + triggerRect.height / 2;
+    const rawOffset = placement === "top" || placement === "bottom" ? triggerCenterX - contentRect.left : triggerCenterY - contentRect.top;
+    const availableSize = placement === "top" || placement === "bottom" ? contentRect.width : contentRect.height;
+    const offset = Math.min(Math.max(rawOffset, TAIL_EDGE_PADDING), Math.max(availableSize - TAIL_EDGE_PADDING, TAIL_EDGE_PADDING));
+
+    this.elements.tooltip.dataset.placement = placement;
+    message.dataset.placement = placement;
+    message.style.setProperty("--tooltip-tail-offset", `${offset}px`);
   }
+
+  #getActiveTooltipMessage(): HTMLElement | null {
+    const assignedContent = this.elements.contentSlot.assignedElements({ flatten: true });
+    if (assignedContent.length === 0) {
+      return this.elements.defaultMessage;
+    }
+    return (assignedContent.find(element => element.localName === "jb-tooltip-message") as HTMLElement | undefined) ?? null;
+  }
+
+  #resolvePlacement(triggerRect: DOMRect, contentRect: DOMRect): ResolvedPlacement {
+    const candidates: Array<{ placement: ResolvedPlacement; distance: number }> = [];
+    if (contentRect.bottom <= triggerRect.top + 1) {
+      candidates.push({ placement: "top", distance: triggerRect.top - contentRect.bottom });
+    }
+    if (contentRect.left >= triggerRect.right - 1) {
+      candidates.push({ placement: "right", distance: contentRect.left - triggerRect.right });
+    }
+    if (contentRect.top >= triggerRect.bottom - 1) {
+      candidates.push({ placement: "bottom", distance: contentRect.top - triggerRect.bottom });
+    }
+    if (contentRect.right <= triggerRect.left + 1) {
+      candidates.push({ placement: "left", distance: triggerRect.left - contentRect.right });
+    }
+    if (candidates.length > 0) {
+      candidates.sort((a, b) => a.distance - b.distance);
+      return candidates[0].placement;
+    }
+
+    const deltaX = contentRect.left + contentRect.width / 2 - (triggerRect.left + triggerRect.width / 2);
+    const deltaY = contentRect.top + contentRect.height / 2 - (triggerRect.top + triggerRect.height / 2);
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      return deltaX >= 0 ? "right" : "left";
+    }
+    return deltaY >= 0 ? "bottom" : "top";
+  }
+
+  #clearTailPositionFrame() {
+    if (this.#tailPositionFrame !== undefined) {
+      window.cancelAnimationFrame(this.#tailPositionFrame);
+      this.#tailPositionFrame = undefined;
+    }
+  }
+
+  #onTriggerPointerEnter = () => {
+    this.#pointerOverTrigger = true;
+    this.show();
+  };
+
+  #onTriggerPointerLeave = () => {
+    this.#pointerOverTrigger = false;
+    this.#scheduleHide();
+  };
+
+  #onTriggerFocusIn = () => {
+    this.#triggerFocused = true;
+    this.show();
+  };
+
+  #onTriggerFocusOut = () => {
+    this.#triggerFocused = false;
+    this.#scheduleHide();
+  };
+
+  #onTooltipPointerEnter = () => {
+    this.#pointerOverTooltip = true;
+    this.#clearHideTimeout();
+  };
+
+  #onTooltipPointerLeave = () => {
+    this.#pointerOverTooltip = false;
+    this.#scheduleHide();
+  };
+
+  #onTooltipFocusIn = () => {
+    this.#tooltipFocused = true;
+    this.#clearHideTimeout();
+  };
+
+  #onTooltipFocusOut = () => {
+    this.#tooltipFocused = false;
+    this.#scheduleHide();
+  };
+
+  #scheduleHide() {
+    this.#clearHideTimeout();
+    this.#hideTimeout = window.setTimeout(() => {
+      if (!this.#pointerOverTrigger && !this.#pointerOverTooltip && !this.#triggerFocused && !this.#tooltipFocused) {
+        this.hide();
+      }
+    }, HIDE_DELAY);
+  }
+
+  #clearHideTimeout() {
+    if (this.#hideTimeout !== undefined) {
+      window.clearTimeout(this.#hideTimeout);
+      this.#hideTimeout = undefined;
+    }
+  }
+
+  #onBeforeToggle = (event: ToggleEvent) => {
+    const forwardedEvent = new ToggleEvent("beforetoggle", {
+      oldState: event.oldState,
+      newState: event.newState,
+      bubbles: true,
+      composed: true,
+      cancelable: event.cancelable,
+    });
+    if (!this.dispatchEvent(forwardedEvent)) {
+      event.preventDefault();
+    }
+  };
+
+  #onToggle = (event: ToggleEvent) => {
+    if (event.newState === "open") {
+      this.#internals.states.add("open");
+      this.#scheduleTailPosition();
+    } else {
+      this.#internals.states.delete("open");
+      this.#clearTailPositionFrame();
+    }
+    this.dispatchEvent(
+      new ToggleEvent("toggle", {
+        oldState: event.oldState,
+        newState: event.newState,
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
 }
-const myElementNotExists = !customElements.get('jb-tooltip');
-if (myElementNotExists) {
-  window.customElements.define('jb-tooltip', JBTooltipWebComponent);
+
+if (!customElements.get("jb-tooltip")) {
+  window.customElements.define("jb-tooltip", JBTooltipWebComponent);
 }

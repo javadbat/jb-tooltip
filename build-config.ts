@@ -6,6 +6,11 @@ export const webComponentList: WebComponentBuildConfig[] = [
     path: "./web-component/lib/jb-tooltip.ts",
     outputPath: "./web-component/dist/jb-tooltip.js",
     tsConfigPath: "./web-component/tsconfig.json",
+    external: ["jb-core", "jb-core/theme"],
+    globals: {
+      "jb-core": "JBCore",
+      "jb-core/theme": "JBCoreTheme",
+    },
     umdName: "JBTooltip",
   },
 ];

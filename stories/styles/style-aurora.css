@@ -1,0 +1,14 @@
+jb-tooltip.aurora-style {
+  --jb-tooltip-bg-color: rgb(25 34 51 / 88%);
+  --jb-tooltip-text-color: #edf7ff;
+  --jb-tooltip-border-radius: 0.75rem;
+  --jb-tooltip-padding: 0.625rem 0.875rem;
+  --jb-tooltip-tail-border-color: rgb(125 228 211 / 55%);
+}
+
+jb-tooltip.aurora-style::part(message) {
+  border: 1px solid rgb(125 228 211 / 55%);
+  background-image: linear-gradient(135deg, rgb(125 228 211 / 18%), rgb(169 156 255 / 20%));
+  box-shadow: 0 0.75rem 2rem rgb(5 10 20 / 42%), 0 0 1.25rem rgb(125 228 211 / 16%);
+  backdrop-filter: blur(1rem);
+}

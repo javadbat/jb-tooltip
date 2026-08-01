@@ -1,6 +1,5 @@
 :host {
   /* Size */
-  --tooltip-max-width: var(--jb-tooltip-max-width, Min(calc(100vw - 4rem), 20rem));
-  /* Other */
-  --tooltip-z-index: var(--jb-tooltip-z-index, 1);
+  --tooltip-max-width: var(--jb-tooltip-max-width, min(calc(100vw - 2rem), 20rem));
+  --tooltip-gap: var(--jb-tooltip-gap, 0.5rem);
 }

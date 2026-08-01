@@ -1,0 +1,172 @@
+.tooltip-trigger {
+  min-block-size: 2.5rem;
+  padding-inline: 1rem;
+  border: 1px solid #aeb7c5;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #182230;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tooltip-trigger:hover,
+.tooltip-trigger:focus-visible {
+  border-color: #2563eb;
+  outline: 2px solid color-mix(in srgb, #2563eb 25%, transparent);
+  outline-offset: 2px;
+}
+
+.rich-content-detail {
+  display: block;
+  margin-block-start: 0.25rem;
+  color: #d8dee9;
+  font-size: 0.75rem;
+}
+
+.custom-tooltip-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #b8e8c8;
+  border-radius: 0.5rem;
+  background: #effbf3;
+  color: #176b36;
+  box-shadow: 0 0.5rem 1.5rem rgb(15 23 42 / 15%);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.custom-tooltip-dot {
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: #22a653;
+}
+
+.tooltip-position-gallery {
+  display: grid;
+  min-block-size: 100vh;
+  box-sizing: border-box;
+  grid-template-columns: repeat(2, minmax(12rem, 1fr));
+  place-items: center;
+  gap: 10rem;
+  padding: 10rem;
+  background: #f7f8fa;
+}
+
+.tooltip-position-example {
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+}
+
+.tooltip-position-label {
+  color: #667085;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 48rem) {
+  .tooltip-position-gallery {
+    grid-template-columns: 1fr;
+    gap: 8rem;
+    padding: 8rem 4rem;
+  }
+}
+
+.tooltip-style-gallery {
+  display: grid;
+  width: min(100%, 76rem);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.tooltip-style-card {
+  display: grid;
+  min-block-size: 8rem;
+  box-sizing: border-box;
+  place-items: center;
+  align-content: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--jb-border-color, #e5e7eb);
+  border-radius: var(--jb-radius, 0.75rem);
+  background: var(--jb-surface, #fff);
+  color: var(--jb-text-primary, #334155);
+}
+
+.tooltip-style-name {
+  font-size: 0.875rem;
+}
+
+.tooltip-style-sample {
+  display: grid;
+  place-items: center;
+}
+
+.tooltip-style-trigger {
+  min-block-size: 2.5rem;
+  padding-inline: 1rem;
+  border: 1px solid var(--jb-border-color, #aeb7c5);
+  border-radius: var(--jb-radius-sm, 0.5rem);
+  background: var(--jb-surface, #fff);
+  color: var(--jb-text-primary, #182230);
+  font: inherit;
+  cursor: help;
+}
+
+.tooltip-style-trigger:hover,
+.tooltip-style-trigger:focus-visible {
+  border-color: var(--jb-focus-color, #2563eb);
+  outline: 2px solid var(--jb-focus-color, #2563eb);
+  outline-offset: 2px;
+}
+
+.tooltip-message-size-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(8rem, 1fr));
+  place-items: center;
+  gap: 3rem;
+  padding: 5rem;
+}
+
+@media (max-width: 60rem) {
+  .tooltip-message-size-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  }
+}
+
+.tooltip-fallback-stage {
+  position: relative;
+  min-block-size: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px),
+    #f8fafc;
+  background-size: 2rem 2rem;
+}
+
+.tooltip-fallback-case {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  color: #667085;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tooltip-fallback-block {
+  top: 0.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip-fallback-inline {
+  top: 65%;
+  left: 0.25rem;
+}

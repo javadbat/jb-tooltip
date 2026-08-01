@@ -1,0 +1,12 @@
+jb-tooltip.forest-style {
+  --jb-tooltip-bg-color: #173d2b;
+  --jb-tooltip-text-color: #edf8ef;
+  --jb-tooltip-border-radius: 0.625rem;
+  --jb-tooltip-padding: 0.625rem 0.875rem;
+  --jb-tooltip-tail-border-color: #5c8f69;
+}
+
+jb-tooltip.forest-style::part(message) {
+  border: 1px solid #5c8f69;
+  box-shadow: 0 0.625rem 1.25rem rgb(16 48 31 / 28%);
+}

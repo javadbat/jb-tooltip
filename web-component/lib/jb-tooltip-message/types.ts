@@ -1,4 +1,6 @@
-export type Elements = {
-    arrow : HTMLDivElement;
-    componentWrapper: HTMLDivElement;
-}
+export type TooltipMessageElementsObject = {
+  componentWrapper: HTMLDivElement;
+  tooltipTail: HTMLSpanElement;
+};
+
+export type SizeVariants = "xs" | "sm" | "md" | "lg" | "xl";
