@@ -1,9 +1,8 @@
 import "./styles.css";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import "jb-tooltip";
-import type { JBTooltipWebComponent } from "jb-tooltip";
-import { createElement, type HTMLAttributes, type ReactNode } from "react";
-import { expect, userEvent, waitFor } from "storybook/test";
+import type { JBTooltipToggleEvent, JBTooltipWebComponent } from "jb-tooltip";
+import { JBTooltip, JBTooltipMessage } from "jb-tooltip/react";
+import { expect, fn, userEvent, waitFor } from "storybook/test";
 
 type PositionArea = "top" | "right" | "bottom" | "left";
 
@@ -13,47 +12,19 @@ type TooltipStoryArgs = {
   positionTryFallbacks: string;
   tail: boolean;
   triggerLabel: string;
-};
-
-type TooltipAttributes = HTMLAttributes<HTMLElement> & {
-  content?: string;
-  "position-area"?: string;
-  "position-try-fallbacks"?: string;
-  tail?: "true";
+  onBeforeToggle?: (event: JBTooltipToggleEvent) => void;
+  onToggle?: (event: JBTooltipToggleEvent) => void;
 };
 
 const positions: PositionArea[] = ["top", "right", "bottom", "left"];
 
-function TooltipElement({
-  children,
-  content,
-  positionArea = "top",
-  positionTryFallbacks = "flip-block, flip-inline",
-  tail = false,
-}: {
-  children: ReactNode;
-  content?: string;
-  positionArea?: PositionArea;
-  positionTryFallbacks?: string;
-  tail?: boolean;
-}) {
-  const attributes: TooltipAttributes = {
-    content,
-    "position-area": positionArea,
-    "position-try-fallbacks": positionTryFallbacks,
-    tail: tail ? "true" : undefined,
-  };
-
-  return createElement("jb-tooltip", attributes, children);
-}
-
-function TooltipExample({ content, positionArea, positionTryFallbacks, tail, triggerLabel }: TooltipStoryArgs) {
+function TooltipExample({ content, onBeforeToggle, onToggle, positionArea, positionTryFallbacks, tail, triggerLabel }: TooltipStoryArgs) {
   return (
-    <TooltipElement content={content} positionArea={positionArea} positionTryFallbacks={positionTryFallbacks} tail={tail}>
+    <JBTooltip content={content} onBeforeToggle={onBeforeToggle} onToggle={onToggle} positionArea={positionArea} positionTryFallbacks={positionTryFallbacks} tail={tail}>
       <button className="tooltip-trigger" type="button">
         {triggerLabel}
       </button>
-    </TooltipElement>
+    </JBTooltip>
   );
 }
 
@@ -195,18 +166,14 @@ export const WithTail: Story = {
 
 export const RichContent: Story = {
   render: () => (
-    <TooltipElement>
+    <JBTooltip>
       <button className="tooltip-trigger" type="button">
         Save
       </button>
-      {createElement(
-        "jb-tooltip-message",
-        { slot: "content" },
-        <>
-          <strong>Save changes</strong> <span className="rich-content-detail">Stores the current draft.</span>
-        </>,
-      )}
-    </TooltipElement>
+      <JBTooltipMessage slot="content">
+        <strong>Save changes</strong> <span className="rich-content-detail">Stores the current draft.</span>
+      </JBTooltipMessage>
+    </JBTooltip>
   ),
   play: async ({ canvasElement }) => {
     const tooltip = getTooltip(canvasElement);
@@ -221,7 +188,7 @@ export const RichContent: Story = {
 
 export const CustomContent: Story = {
   render: () => (
-    <TooltipElement positionArea="bottom">
+    <JBTooltip positionArea="bottom">
       <button className="tooltip-trigger" type="button">
         Build status
       </button>
@@ -229,7 +196,7 @@ export const CustomContent: Story = {
         <span className="custom-tooltip-dot" />
         All checks passed
       </div>
-    </TooltipElement>
+    </JBTooltip>
   ),
 };
 
@@ -242,11 +209,11 @@ export const Positions: Story = {
       {positions.map(position => (
         <div className="tooltip-position-example" key={position}>
           <span className="tooltip-position-label">{position}</span>
-          <TooltipElement content={`Tooltip placed at the ${position}`} positionArea={position} positionTryFallbacks="none" tail>
+          <JBTooltip content={`Tooltip placed at the ${position}`} positionArea={position} positionTryFallbacks="none" tail>
             <button className="tooltip-trigger" type="button">
               {position}
             </button>
-          </TooltipElement>
+          </JBTooltip>
         </div>
       ))}
     </div>
@@ -269,19 +236,19 @@ export const FallbackPositions: Story = {
     <div className="tooltip-fallback-stage">
       <div className="tooltip-fallback-case tooltip-fallback-block">
         <span>Requested top → resolved bottom</span>
-        <TooltipElement content="Flipped away from the top viewport edge" positionArea="top" tail>
+        <JBTooltip content="Flipped away from the top viewport edge" positionArea="top" tail>
           <button className="tooltip-trigger" type="button">
             Top edge
           </button>
-        </TooltipElement>
+        </JBTooltip>
       </div>
       <div className="tooltip-fallback-case tooltip-fallback-inline">
         <span>Requested left → resolved right</span>
-        <TooltipElement content="Flipped away from the left viewport edge" positionArea="left" tail>
+        <JBTooltip content="Flipped away from the left viewport edge" positionArea="left" tail>
           <button className="tooltip-trigger" type="button">
             Left edge
           </button>
-        </TooltipElement>
+        </JBTooltip>
       </div>
     </div>
   ),
@@ -316,5 +283,32 @@ export const ImperativeApi: Story = {
     await expectOpen(tooltip);
     expect(tooltip.toggle()).toBe(false);
     await expectClosed(tooltip);
+  },
+};
+
+export const EventLifecycle: Story = {
+  args: {
+    content: "Lifecycle events are exposed by the tooltip.",
+    onBeforeToggle: fn(),
+    onToggle: fn(),
+    triggerLabel: "Observe lifecycle",
+  },
+  play: async ({ args, canvasElement }) => {
+    const tooltip = getTooltip(canvasElement);
+    const trigger = getTrigger(tooltip);
+
+    trigger.focus();
+    await expectOpen(tooltip);
+    await waitFor(() => {
+      expect(args.onBeforeToggle).toHaveBeenCalledWith(expect.objectContaining({ newState: "open" }));
+      expect(args.onToggle).toHaveBeenCalledWith(expect.objectContaining({ newState: "open" }));
+    });
+
+    await userEvent.keyboard("{Escape}");
+    await expectClosed(tooltip);
+    await waitFor(() => {
+      expect(args.onBeforeToggle).toHaveBeenCalledWith(expect.objectContaining({ newState: "closed" }));
+      expect(args.onToggle).toHaveBeenCalledWith(expect.objectContaining({ newState: "closed" }));
+    });
   },
 };

@@ -12,21 +12,29 @@
     "tooltip",
     "web component"
   ],
-  "version": "1.0.0",
+  "version": "0.1.0",
   "bugs": "https://github.com/javadbat/jb-tooltip/issues",
   "license": "MIT",
   "files": [
     "LICENSE",
     "README.md",
+    "web-component/custom-elements.json",
     "web-component/lib/",
-    "web-component/dist/"
+    "web-component/dist/",
+    "react/",
+    "react/dist/"
   ],
   "main": "index.js",
   "types": "./web-component/dist/jb-tooltip.d.ts",
+  "customElements": "web-component/custom-elements.json",
   "exports": {
     ".": {
       "types": "./web-component/dist/jb-tooltip.d.ts",
       "default": "./index.js"
+    },
+    "./react": {
+      "types": "./react/dist/JBTooltip.d.ts",
+      "default": "./react/index.js"
     },
     "./*": "./*"
   },

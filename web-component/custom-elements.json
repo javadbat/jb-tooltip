@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "README.md",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "lib/jb-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Accessible tooltip web component built on the browser Popover API and CSS anchor positioning.",
+          "name": "JBTooltipWebComponent",
+          "tagName": "jb-tooltip",
+          "customElement": true,
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "attributes": [
+            {
+              "name": "content",
+              "description": "Plain-text tooltip content. Use the content slot for rich or custom-styled content.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "position-area",
+              "description": "Preferred CSS anchor position-area value.",
+              "type": {
+                "text": "string"
+              },
+              "default": "top"
+            },
+            {
+              "name": "position-try-fallbacks",
+              "description": "CSS position-try-fallbacks value used when the preferred placement does not fit.",
+              "type": {
+                "text": "string"
+              },
+              "default": "flip-block, flip-inline"
+            },
+            {
+              "name": "tail",
+              "description": "Shows a triangular tail on the active jb-tooltip-message.",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "elements",
+              "description": "Internal element references for advanced integrations. Prefer the public methods and styling API.",
+              "type": {
+                "text": "ElementsObject"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "content",
+              "description": "Plain-text tooltip content.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "positionArea",
+              "description": "Preferred CSS anchor position-area value.",
+              "type": {
+                "text": "string"
+              },
+              "default": "top"
+            },
+            {
+              "kind": "field",
+              "name": "positionTryFallbacks",
+              "description": "CSS position-try-fallbacks value used when the preferred placement does not fit.",
+              "type": {
+                "text": "string"
+              },
+              "default": "flip-block, flip-inline"
+            },
+            {
+              "kind": "field",
+              "name": "tail",
+              "description": "Whether the active tooltip message displays a triangular tail.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "description": "Whether the native popover is currently open.",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true
+            }
+          ],
+          "methods": [
+            {
+              "name": "show",
+              "description": "Opens the tooltip when it is connected and has a trigger and content."
+            },
+            {
+              "name": "hide",
+              "description": "Closes the tooltip."
+            },
+            {
+              "name": "toggle",
+              "description": "Toggles the tooltip and returns its resulting open state.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "beforetoggle",
+              "description": "Forwarded before the native popover changes state. Canceling it prevents the change.",
+              "type": {
+                "text": "ToggleEvent"
+              }
+            },
+            {
+              "name": "toggle",
+              "description": "Forwarded after the native popover changes state.",
+              "type": {
+                "text": "ToggleEvent"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Tooltip trigger. The first assigned element becomes the CSS anchor and interaction target."
+            },
+            {
+              "name": "content",
+              "description": "Rich tooltip content. Use jb-tooltip-message to opt into message sizing and tail styling."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "tooltip",
+              "description": "The native popover surface."
+            },
+            {
+              "name": "content",
+              "description": "Wrapper around the tooltip content."
+            },
+            {
+              "name": "message",
+              "description": "The exported fallback jb-tooltip-message surface used by the content attribute."
+            },
+            {
+              "name": "tail",
+              "description": "The exported fallback jb-tooltip-message tail used by the content attribute."
+            }
+          ],
+          "cssStates": [
+            {
+              "name": "open",
+              "description": "Applied while the native tooltip popover is open."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--jb-tooltip-max-width",
+              "description": "Maximum width of the tooltip popover."
+            },
+            {
+              "name": "--jb-tooltip-gap",
+              "description": "Space between the trigger and tooltip."
+            },
+            {
+              "name": "--jb-tooltip-padding",
+              "description": "Message padding override for every size."
+            },
+            {
+              "name": "--jb-tooltip-font-size",
+              "description": "Message font-size override for every size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius",
+              "description": "Message border-radius override for every size."
+            },
+            {
+              "name": "--jb-tooltip-bg-color",
+              "description": "Message background color."
+            },
+            {
+              "name": "--jb-tooltip-text-color",
+              "description": "Message text color."
+            },
+            {
+              "name": "--jb-tooltip-border",
+              "description": "Message border shorthand."
+            },
+            {
+              "name": "--jb-tooltip-box-shadow",
+              "description": "Message box shadow."
+            },
+            {
+              "name": "--jb-tooltip-tail-size",
+              "description": "Tail size override for every message size."
+            },
+            {
+              "name": "--jb-tooltip-tail-bg-color",
+              "description": "Tail fill color."
+            },
+            {
+              "name": "--jb-tooltip-tail-border-color",
+              "description": "Tail border color."
+            },
+            {
+              "name": "--jb-tooltip-tail-border-width",
+              "description": "Tail border width."
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "JBTooltipWebComponent",
+          "declaration": {
+            "name": "JBTooltipWebComponent",
+            "module": "lib/jb-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "jb-tooltip",
+          "declaration": {
+            "name": "JBTooltipWebComponent",
+            "module": "lib/jb-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "lib/jb-tooltip-message/jb-tooltip-message.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Styled tooltip message surface with optional size variants and a triangular tail.",
+          "name": "JBTooltipMessageWebComponent",
+          "tagName": "jb-tooltip-message",
+          "customElement": true,
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "attributes": [
+            {
+              "name": "size",
+              "description": "Message size variant.",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
+              },
+              "default": "md"
+            },
+            {
+              "name": "tail",
+              "description": "Shows a triangular tail. Inside jb-tooltip, the parent tail attribute can also enable it.",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "description": "Message size variant.",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
+              },
+              "default": "md"
+            },
+            {
+              "kind": "field",
+              "name": "tail",
+              "description": "Whether the triangular tail is visible.",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Tooltip message content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "message",
+              "description": "The styled message surface."
+            },
+            {
+              "name": "tail",
+              "description": "The triangular tail."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--jb-tooltip-padding",
+              "description": "Padding override for every size."
+            },
+            {
+              "name": "--jb-tooltip-font-size",
+              "description": "Font-size override for every size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius",
+              "description": "Border-radius override for every size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size",
+              "description": "Tail size override for every size."
+            },
+            {
+              "name": "--jb-tooltip-bg-color",
+              "description": "Message background color."
+            },
+            {
+              "name": "--jb-tooltip-text-color",
+              "description": "Message text color."
+            },
+            {
+              "name": "--jb-tooltip-border",
+              "description": "Message border shorthand."
+            },
+            {
+              "name": "--jb-tooltip-box-shadow",
+              "description": "Message box shadow."
+            },
+            {
+              "name": "--jb-tooltip-tail-bg-color",
+              "description": "Tail fill color."
+            },
+            {
+              "name": "--jb-tooltip-tail-border-color",
+              "description": "Tail border color."
+            },
+            {
+              "name": "--jb-tooltip-tail-border-width",
+              "description": "Tail border width."
+            },
+            {
+              "name": "--jb-tooltip-padding-xs",
+              "description": "Padding for the xs size."
+            },
+            {
+              "name": "--jb-tooltip-font-size-xs",
+              "description": "Font size for the xs size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius-xs",
+              "description": "Border radius for the xs size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size-xs",
+              "description": "Tail size for the xs size."
+            },
+            {
+              "name": "--jb-tooltip-padding-sm",
+              "description": "Padding for the sm size."
+            },
+            {
+              "name": "--jb-tooltip-font-size-sm",
+              "description": "Font size for the sm size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius-sm",
+              "description": "Border radius for the sm size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size-sm",
+              "description": "Tail size for the sm size."
+            },
+            {
+              "name": "--jb-tooltip-padding-md",
+              "description": "Padding for the default md size."
+            },
+            {
+              "name": "--jb-tooltip-font-size-md",
+              "description": "Font size for the default md size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius-md",
+              "description": "Border radius for the default md size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size-md",
+              "description": "Tail size for the default md size."
+            },
+            {
+              "name": "--jb-tooltip-padding-lg",
+              "description": "Padding for the lg size."
+            },
+            {
+              "name": "--jb-tooltip-font-size-lg",
+              "description": "Font size for the lg size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius-lg",
+              "description": "Border radius for the lg size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size-lg",
+              "description": "Tail size for the lg size."
+            },
+            {
+              "name": "--jb-tooltip-padding-xl",
+              "description": "Padding for the xl size."
+            },
+            {
+              "name": "--jb-tooltip-font-size-xl",
+              "description": "Font size for the xl size."
+            },
+            {
+              "name": "--jb-tooltip-border-radius-xl",
+              "description": "Border radius for the xl size."
+            },
+            {
+              "name": "--jb-tooltip-tail-size-xl",
+              "description": "Tail size for the xl size."
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "JBTooltipMessageWebComponent",
+          "declaration": {
+            "name": "JBTooltipMessageWebComponent",
+            "module": "lib/jb-tooltip-message/jb-tooltip-message.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "jb-tooltip-message",
+          "declaration": {
+            "name": "JBTooltipMessageWebComponent",
+            "module": "lib/jb-tooltip-message/jb-tooltip-message.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

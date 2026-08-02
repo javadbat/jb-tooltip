@@ -14,4 +14,19 @@ export const webComponentList: WebComponentBuildConfig[] = [
     umdName: "JBTooltip",
   },
 ];
-export const reactComponentList: ReactComponentBuildConfig[] = [];
+export const reactComponentList: ReactComponentBuildConfig[] = [
+  {
+    name: "jb-tooltip-react",
+    path: "./react/lib/JBTooltip.tsx",
+    outputPath: "./react/dist/JBTooltip.js",
+    external: ["react", "jb-tooltip", "jb-core", "jb-core/react"],
+    globals: {
+      react: "React",
+      "jb-tooltip": "JBTooltip",
+      "jb-core": "JBCore",
+      "jb-core/react": "JBCoreReact",
+    },
+    umdName: "JBTooltipReact",
+    dir: "./react",
+  },
+];

@@ -1,0 +1,35 @@
+{
+  "name": "jb-tooltip-react",
+  "description": "React wrapper for jb-tooltip",
+  "type": "module",
+  "author": {
+    "name": "mohammad javad bathaei",
+    "email": "javadbat@gmail.com"
+  },
+  "keywords": [
+    "jb",
+    "jb-tooltip",
+    "tooltip",
+    "react"
+  ],
+  "version": "1.0.0",
+  "bugs": "https://github.com/javadbat/jb-tooltip/issues",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "index.js",
+    "lib/",
+    "dist/"
+  ],
+  "main": "index.js",
+  "module": "index.js",
+  "types": "./dist/JBTooltip.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:javadbat/jb-tooltip.git"
+  },
+  "dependencies": {
+    "jb-core": "^0.30.0",
+    "jb-tooltip": "^1.0.0"
+  }
+}

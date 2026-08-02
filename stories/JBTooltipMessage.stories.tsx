@@ -1,18 +1,8 @@
 import "./styles.css";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import "jb-tooltip";
 import type { JBTooltipWebComponent, SizeVariants } from "jb-tooltip";
-import { createElement, type HTMLAttributes } from "react";
+import { JBTooltip, JBTooltipMessage } from "jb-tooltip/react";
 import { expect, waitFor } from "storybook/test";
-
-type TooltipAttributes = HTMLAttributes<HTMLElement> & {
-  "position-area": string;
-  tail?: "true";
-};
-
-type MessageAttributes = HTMLAttributes<HTMLElement> & {
-  size: SizeVariants;
-};
 
 type TooltipMessageSampleProps = {
   size: SizeVariants;
@@ -22,22 +12,15 @@ type TooltipMessageSampleProps = {
 const sizes: SizeVariants[] = ["xs", "sm", "md", "lg", "xl"];
 
 function TooltipMessageSample({ size, tail }: TooltipMessageSampleProps) {
-  const tooltipAttributes: TooltipAttributes = {
-    "position-area": "top",
-    tail: tail ? "true" : undefined,
-  };
-  const messageAttributes: MessageAttributes = {
-    size,
-    slot: "content",
-  };
-
-  return createElement(
-    "jb-tooltip",
-    tooltipAttributes,
-    <button className="tooltip-trigger" type="button">
-      {size.toUpperCase()} message
-    </button>,
-    createElement("jb-tooltip-message", messageAttributes, `${size.toUpperCase()} tooltip message`),
+  return (
+    <JBTooltip positionArea="top" tail={tail}>
+      <button className="tooltip-trigger" type="button">
+        {size.toUpperCase()} message
+      </button>
+      <JBTooltipMessage size={size} slot="content">
+        {size.toUpperCase()} tooltip message
+      </JBTooltipMessage>
+    </JBTooltip>
   );
 }
 
