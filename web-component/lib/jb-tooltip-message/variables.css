@@ -6,7 +6,7 @@
   --message-tail-size: var(--jb-tooltip-tail-size, var(--jb-tooltip-tail-size-md, 0.375rem));
   /* Theme/Color */
   --message-bg-color: var(--jb-tooltip-bg-color, var(--jb-surface, #fff));
-  --message-text-color: var(--jb-tooltip-text-color, var(--jb-text-primary, #1f2937));
+  --message-text-color: var(--jb-tooltip-text-color, var(--jb-content-primary, #1f2937));
   --message-border: var(--jb-tooltip-border, 1px solid var(--jb-border-color, #d0d5dd));
   --message-box-shadow: var(--jb-tooltip-box-shadow, 0 0.375rem 1rem rgb(15 23 42 / 14%));
   --message-tail-bg-color: var(--jb-tooltip-tail-bg-color, var(--message-bg-color));
