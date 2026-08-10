@@ -47,7 +47,7 @@ The package also includes a typed React wrapper. See [`react/README.md`](./react
 For React, use the included wrapper:
 
 ```tsx
-import { JBTooltip, JBTooltipMessage } from 'jb-tooltip/react';
+import { JBTooltip, JBTooltipMessage } from '@jbui/tooltip/react';
 
 <JBTooltip content="Save the current draft" positionArea="top" tail>
   <button type="button">Save</button>
@@ -59,11 +59,11 @@ See the [React wrapper README](./react/README.md) for rich content, event callba
 ## Installation
 
 ```sh
-npm install jb-tooltip
+npm install @jbui/tooltip
 ```
 
 ```js
-import 'jb-tooltip';
+import '@jbui/tooltip';
 ```
 
 ### CDN

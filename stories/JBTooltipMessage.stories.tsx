@@ -1,7 +1,7 @@
 import "./styles.css";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { JBTooltipWebComponent, SizeVariants } from "jb-tooltip";
-import { JBTooltip, JBTooltipMessage } from "jb-tooltip/react";
+import type { JBTooltipWebComponent, SizeVariants } from "@jbui/tooltip";
+import { JBTooltip, JBTooltipMessage } from "@jbui/tooltip/react";
 import { expect, waitFor } from "storybook/test";
 
 type TooltipMessageSampleProps = {

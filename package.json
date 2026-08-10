@@ -1,5 +1,5 @@
 {
-  "name": "jb-tooltip",
+  "name": "@jbui/tooltip",
   "description": "tooltip web component",
   "type": "module",
   "author": {

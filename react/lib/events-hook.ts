@@ -1,5 +1,5 @@
 import { useEvent } from "jb-core/react";
-import type { JBTooltipToggleEvent, JBTooltipWebComponent } from "jb-tooltip";
+import type { JBTooltipToggleEvent, JBTooltipWebComponent } from "@jbui/tooltip";
 import type { RefObject } from "react";
 
 export type EventProps = {

@@ -24,8 +24,8 @@ import "./styles/style-porcelain.css";
 import "./styles/style-sunset.css";
 import "./styles/style-terminal.css";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import "jb-tooltip";
-import type { JBTooltipWebComponent } from "jb-tooltip";
+import "@jbui/tooltip";
+import type { JBTooltipWebComponent } from "@jbui/tooltip";
 import { createElement, type HTMLAttributes } from "react";
 import { expect, waitFor } from "storybook/test";
 

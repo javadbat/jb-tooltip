@@ -1,8 +1,8 @@
 "use client";
 
 import type { JBElementStandardProps } from "jb-core/react";
-import "jb-tooltip";
-import type { JBTooltipMessageWebComponent, JBTooltipWebComponent, SizeVariants } from "jb-tooltip";
+import "@jbui/tooltip";
+import type { JBTooltipMessageWebComponent, JBTooltipWebComponent, SizeVariants } from "@jbui/tooltip";
 import React, { type PropsWithChildren, useImperativeHandle, useRef } from "react";
 import { type EventProps, useEvents } from "./events-hook.js";
 import "./module-declaration.js";
@@ -60,4 +60,4 @@ export const JBTooltipMessage = React.forwardRef<JBTooltipMessageWebComponent, J
 
 JBTooltipMessage.displayName = "JBTooltipMessage";
 
-export type { SizeVariants } from "jb-tooltip";
+export type { SizeVariants } from "@jbui/tooltip";

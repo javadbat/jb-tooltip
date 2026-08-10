@@ -19,10 +19,10 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
     name: "jb-tooltip-react",
     path: "./react/lib/JBTooltip.tsx",
     outputPath: "./react/dist/JBTooltip.js",
-    external: ["react", "jb-tooltip", "jb-core", "jb-core/react"],
+    external: ["react", "@jbui/tooltip", "jb-core", "jb-core/react"],
     globals: {
       react: "React",
-      "jb-tooltip": "JBTooltip",
+      "@jbui/tooltip": "JBTooltip",
       "jb-core": "JBCore",
       "jb-core/react": "JBCoreReact",
     },

@@ -1,4 +1,4 @@
-import type { JBTooltipMessageWebComponent, JBTooltipWebComponent, SizeVariants } from "jb-tooltip";
+import type { JBTooltipMessageWebComponent, JBTooltipWebComponent, SizeVariants } from "@jbui/tooltip";
 
 declare module "react" {
   namespace JSX {

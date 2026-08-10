@@ -1,7 +1,7 @@
 import "./styles.css";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { JBTooltipToggleEvent, JBTooltipWebComponent } from "jb-tooltip";
-import { JBTooltip, JBTooltipMessage } from "jb-tooltip/react";
+import type { JBTooltipToggleEvent, JBTooltipWebComponent } from "@jbui/tooltip";
+import { JBTooltip, JBTooltipMessage } from "@jbui/tooltip/react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
 type PositionArea = "top" | "right" | "bottom" | "left";

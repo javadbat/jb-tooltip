@@ -5,11 +5,11 @@ React components for the `jb-tooltip` web component. See the [basic React demo](
 ## Installation
 
 ```sh
-npm install jb-tooltip
+npm install @jbui/tooltip
 ```
 
 ```tsx
-import { JBTooltip, JBTooltipMessage } from "jb-tooltip/react";
+import { JBTooltip, JBTooltipMessage } from "@jbui/tooltip/react";
 ```
 
 ## Basic usage
@@ -47,8 +47,8 @@ Use `positionArea` and `positionTryFallbacks` for native placement and overflow 
 
 ```tsx
 import { useRef } from "react";
-import type { JBTooltipWebComponent } from "jb-tooltip";
-import { JBTooltip } from "jb-tooltip/react";
+import type { JBTooltipWebComponent } from "@jbui/tooltip";
+import { JBTooltip } from "@jbui/tooltip/react";
 
 const tooltipRef = useRef<JBTooltipWebComponent>(null);
 

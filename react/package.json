@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "jb-core": "^0.30.0",
-    "jb-tooltip": "^1.0.0"
+    "@jbui/tooltip": "^1.0.0"
   }
 }
