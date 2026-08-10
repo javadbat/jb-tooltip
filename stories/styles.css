@@ -95,7 +95,7 @@
   border: 1px solid var(--jb-border-color, #e5e7eb);
   border-radius: var(--jb-radius, 0.75rem);
   background: var(--jb-surface, #fff);
-  color: var(--jb-text-primary, #334155);
+  color: var(--jb-content-primary, #334155);
 }
 
 .tooltip-style-name {
@@ -113,7 +113,7 @@
   border: 1px solid var(--jb-border-color, #aeb7c5);
   border-radius: var(--jb-radius-sm, 0.5rem);
   background: var(--jb-surface, #fff);
-  color: var(--jb-text-primary, #182230);
+  color: var(--jb-content-primary, #182230);
   font: inherit;
   cursor: help;
 }
