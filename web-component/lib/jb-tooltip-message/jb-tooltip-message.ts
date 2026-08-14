@@ -1,5 +1,5 @@
 import { registerDefaultVariables } from "jb-core/theme";
-import { parseBooleanAttribute } from "jb-core";
+import { JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import CSS from "./jb-tooltip-message.css";
 import { renderHTML } from "./render.js";
 import type { SizeVariants, TooltipMessageElementsObject } from "./types.js";
@@ -8,7 +8,7 @@ export * from "./types.js";
 
 const sizes: SizeVariants[] = ["xs", "sm", "md", "lg", "xl"];
 
-export class JBTooltipMessageWebComponent extends HTMLElement {
+export class JBTooltipMessageWebComponent extends JBBaseComponent {
   elements!: TooltipMessageElementsObject;
 
   get size(): SizeVariants {
@@ -54,6 +54,6 @@ export class JBTooltipMessageWebComponent extends HTMLElement {
   }
 }
 
-if (!customElements.get("jb-tooltip-message")) {
-  window.customElements.define("jb-tooltip-message", JBTooltipMessageWebComponent);
+if (globalThis.customElements && !globalThis.customElements.get("jb-tooltip-message")) {
+  globalThis.customElements.define("jb-tooltip-message", JBTooltipMessageWebComponent);
 }

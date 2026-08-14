@@ -1,5 +1,5 @@
 import { registerDefaultVariables } from "jb-core/theme";
-import { parseBooleanAttribute } from "jb-core";
+import { JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import CSS from "./jb-tooltip.css";
 import "./jb-tooltip-message/jb-tooltip-message.js";
 import { renderHTML } from "./render.js";
@@ -13,7 +13,7 @@ const TAIL_EDGE_PADDING = 8;
 
 type ResolvedPlacement = "top" | "right" | "bottom" | "left";
 
-export class JBTooltipWebComponent extends HTMLElement {
+export class JBTooltipWebComponent extends JBBaseComponent {
   elements!: ElementsObject;
   #internals!: ElementInternals;
   #eventController?: AbortController;
@@ -442,6 +442,6 @@ export class JBTooltipWebComponent extends HTMLElement {
   };
 }
 
-if (!customElements.get("jb-tooltip")) {
-  window.customElements.define("jb-tooltip", JBTooltipWebComponent);
+if (globalThis.customElements && !globalThis.customElements.get("jb-tooltip")) {
+  globalThis.customElements.define("jb-tooltip", JBTooltipWebComponent);
 }
