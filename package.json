@@ -43,6 +43,6 @@
     "url": "git@github.com:javadbat/jb-tooltip.git"
   },
   "dependencies": {
-    "jb-core": "^0.34.0"
+    "jb-core": "^0.35.0"
   }
 }

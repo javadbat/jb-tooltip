@@ -1,5 +1,5 @@
+import { defineWebComponent, JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import { registerDefaultVariables } from "jb-core/theme";
-import { JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import CSS from "./jb-tooltip-message.css";
 import { renderHTML } from "./render.js";
 import type { SizeVariants, TooltipMessageElementsObject } from "./types.js";
@@ -54,6 +54,4 @@ export class JBTooltipMessageWebComponent extends JBBaseComponent {
   }
 }
 
-if (globalThis.customElements && !globalThis.customElements.get("jb-tooltip-message")) {
-  globalThis.customElements.define("jb-tooltip-message", JBTooltipMessageWebComponent);
-}
+defineWebComponent("jb-tooltip-message", JBTooltipMessageWebComponent);
