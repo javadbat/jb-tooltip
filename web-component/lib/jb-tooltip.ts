@@ -443,3 +443,9 @@ export class JBTooltipWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-tooltip", JBTooltipWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-tooltip": JBTooltipWebComponent;
+  }
+}

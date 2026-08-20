@@ -55,3 +55,9 @@ export class JBTooltipMessageWebComponent extends JBBaseComponent {
 }
 
 defineWebComponent("jb-tooltip-message", JBTooltipMessageWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-tooltip-message": JBTooltipMessageWebComponent;
+  }
+}
