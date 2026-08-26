@@ -26,7 +26,7 @@
   "types": "./dist/JBTooltip.d.ts",
   "repository": {
     "type": "git",
-    "url": "git@github.com:javadbat/jb-tooltip.git"
+    "url": "https://github.com/javadbat/jb-tooltip.git"
   },
   "dependencies": {
     "jb-core": "^0.34.0",
