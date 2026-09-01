@@ -1,10 +1,10 @@
 # Changelog
 
-## Unreleased
+## [0.3.0] - 2026-09-02
 
 ### Changed
 
-- Made custom-element module evaluation SSR-safe by extending `JBBaseComponent` where needed and registering elements through the shared `defineWebComponent()` helper; raised the minimum `jb-core` version to `0.35.0`.
+- Made custom-element module evaluation SSR-safe by extending `JBBaseComponent` where needed and registering elements through the shared `defineWebComponent()` helper; raised the minimum `jb-core` version to `0.36.0`.
 
 ## [0.2.1] 2026-08-14
 
