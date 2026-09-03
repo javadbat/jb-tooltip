@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.0] - 2026-09-03
+
+### Changed
+
+- Breaking: renamed the public `open` state property to `isOpen` and renamed `show()`/`hide()` to `open()`/`close()`.
+
 ## [0.3.0] - 2026-09-02
 
 ### Changed

@@ -48,14 +48,14 @@ function getSurface(tooltip: JBTooltipWebComponent) {
 
 async function expectOpen(tooltip: JBTooltipWebComponent) {
   await waitFor(() => {
-    expect(tooltip.open).toBe(true);
+    expect(tooltip.isOpen).toBe(true);
     expect(getSurface(tooltip).matches(":popover-open")).toBe(true);
   });
 }
 
 async function expectClosed(tooltip: JBTooltipWebComponent) {
   await waitFor(() => {
-    expect(tooltip.open).toBe(false);
+    expect(tooltip.isOpen).toBe(false);
     expect(getSurface(tooltip).matches(":popover-open")).toBe(false);
   });
 }
@@ -79,7 +79,7 @@ async function expectPosition(tooltip: JBTooltipWebComponent, position: Position
     expect(surfaceRect.right).toBeLessThanOrEqual(triggerRect.left);
   }
 
-  tooltip.hide();
+  tooltip.close();
   trigger.blur();
   await expectClosed(tooltip);
 }
@@ -235,7 +235,7 @@ export const FallbackPositions: Story = {
   render: () => (
     <div className="tooltip-fallback-stage">
       <div className="tooltip-fallback-case tooltip-fallback-block">
-        <span>Requested top → resolved bottom</span>
+        <span>Requested top â†’ resolved bottom</span>
         <JBTooltip content="Flipped away from the top viewport edge" positionArea="top" tail>
           <button className="tooltip-trigger" type="button">
             Top edge
@@ -243,7 +243,7 @@ export const FallbackPositions: Story = {
         </JBTooltip>
       </div>
       <div className="tooltip-fallback-case tooltip-fallback-inline">
-        <span>Requested left → resolved right</span>
+        <span>Requested left â†’ resolved right</span>
         <JBTooltip content="Flipped away from the left viewport edge" positionArea="left" tail>
           <button className="tooltip-trigger" type="button">
             Left edge
@@ -267,16 +267,16 @@ export const FallbackPositions: Story = {
 
 export const ImperativeApi: Story = {
   args: {
-    content: "Controlled with show(), hide(), and toggle().",
+    content: "Controlled with open(), close(), and toggle().",
     triggerLabel: "Imperative tooltip",
   },
   play: async ({ canvasElement }) => {
     const tooltip = getTooltip(canvasElement);
 
-    tooltip.show();
+    tooltip.isOpen;
     await expectOpen(tooltip);
 
-    tooltip.hide();
+    tooltip.close();
     await expectClosed(tooltip);
 
     expect(tooltip.toggle()).toBe(true);

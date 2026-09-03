@@ -76,8 +76,13 @@ export class JBTooltipWebComponent extends JBBaseComponent {
     this.toggleAttribute("tail", value);
   }
 
-  get open(): boolean {
+  get isOpen(): boolean {
     return this.elements.tooltip.matches(":popover-open");
+  }
+
+  set isOpen(value: boolean) {
+    if (value) this.open();
+    else this.close();
   }
 
   constructor() {
@@ -115,8 +120,8 @@ export class JBTooltipWebComponent extends JBBaseComponent {
   }
 
   /** Opens the tooltip when it has a trigger and content. */
-  show() {
-    if (!this.isConnected || !this.#trigger || !this.#hasContent() || this.open) {
+  open() {
+    if (!this.isConnected || !this.#trigger || !this.#hasContent() || this.isOpen) {
       return;
     }
     this.#clearHideTimeout();
@@ -124,21 +129,21 @@ export class JBTooltipWebComponent extends JBBaseComponent {
   }
 
   /** Closes the tooltip. */
-  hide() {
+  close() {
     this.#clearHideTimeout();
-    if (this.open) {
+    if (this.isOpen) {
       this.elements.tooltip.hidePopover();
     }
   }
 
   /** Toggles the tooltip and returns its resulting open state. */
   toggle(): boolean {
-    if (this.open) {
-      this.hide();
+    if (this.isOpen) {
+      this.close();
     } else {
-      this.show();
+      this.open();
     }
-    return this.open;
+    return this.isOpen;
   }
 
   #initWebComponent() {
@@ -192,7 +197,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
     this.#triggerFocused = false;
 
     if (!this.#trigger) {
-      this.hide();
+      this.close();
       this.#observeTailGeometry();
       return;
     }
@@ -211,7 +216,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
     this.elements.fallbackContent.textContent = this.content;
     this.#updateAccessibleDescription();
     if (!this.#hasContent()) {
-      this.hide();
+      this.close();
     }
     this.#scheduleTailPosition();
   };
@@ -282,7 +287,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
   }
 
   #scheduleTailPosition = () => {
-    if (!this.open || this.#tailPositionFrame !== undefined) {
+    if (!this.isOpen || this.#tailPositionFrame !== undefined) {
       return;
     }
     this.#tailPositionFrame = window.requestAnimationFrame(() => {
@@ -294,7 +299,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
   #updateTailPosition() {
     const trigger = this.#trigger;
     const message = this.#getActiveTooltipMessage();
-    if (!trigger || !message || !this.open) {
+    if (!trigger || !message || !this.isOpen) {
       return;
     }
 
@@ -356,7 +361,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
 
   #onTriggerPointerEnter = () => {
     this.#pointerOverTrigger = true;
-    this.show();
+    this.open();
   };
 
   #onTriggerPointerLeave = () => {
@@ -366,7 +371,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
 
   #onTriggerFocusIn = () => {
     this.#triggerFocused = true;
-    this.show();
+    this.open();
   };
 
   #onTriggerFocusOut = () => {
@@ -398,7 +403,7 @@ export class JBTooltipWebComponent extends JBBaseComponent {
     this.#clearHideTimeout();
     this.#hideTimeout = window.setTimeout(() => {
       if (!this.#pointerOverTrigger && !this.#pointerOverTooltip && !this.#triggerFocused && !this.#tooltipFocused) {
-        this.hide();
+        this.close();
       }
     }, HIDE_DELAY);
   }

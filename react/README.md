@@ -33,7 +33,7 @@ The first child is the trigger and should be focusable. Use `content` for plain 
 </JBTooltip>
 ```
 
-Use any element with `slot="content"` for a fully custom tooltip surface. [Rich demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--rich-content) · [Custom demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--custom-content)
+Use any element with `slot="content"` for a fully custom tooltip surface. [Rich demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--rich-content) Â· [Custom demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--custom-content)
 
 ## When to use
 
@@ -41,7 +41,7 @@ Use `JBTooltip` for concise, non-interactive clarification. Prefer a popover, me
 
 ## Placement and message sizes
 
-Use `positionArea` and `positionTryFallbacks` for native placement and overflow handling. Use `tail` for the standard pointer and `JBTooltipMessage` for size variants. [Positions demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--positions) · [Fallback demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--fallback-positions) · [Sizes demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip-message--sizes)
+Use `positionArea` and `positionTryFallbacks` for native placement and overflow handling. Use `tail` for the standard pointer and `JBTooltipMessage` for size variants. [Positions demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--positions) Â· [Fallback demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--fallback-positions) Â· [Sizes demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip-message--sizes)
 
 ## Events and imperative API
 
@@ -63,7 +63,7 @@ const tooltipRef = useRef<JBTooltipWebComponent>(null);
 </JBTooltip>;
 ```
 
-The forwarded ref exposes `show()`, `hide()`, `toggle()`, and the read-only `open` property. `onBeforeToggle` and `onToggle` expose the native popover lifecycle. [Imperative demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) · [Lifecycle demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--event-lifecycle)
+The forwarded ref exposes `open()`, `close()`, `toggle()`, and the read-only `open` property. `onBeforeToggle` and `onToggle` expose the native popover lifecycle. [Imperative demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) Â· [Lifecycle demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--event-lifecycle)
 
 ## Props
 

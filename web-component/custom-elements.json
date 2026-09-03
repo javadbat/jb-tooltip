@@ -92,7 +92,7 @@
             },
             {
               "kind": "field",
-              "name": "open",
+              "name": "isOpen",
               "description": "Whether the native popover is currently open.",
               "type": {
                 "text": "boolean"
@@ -102,11 +102,11 @@
           ],
           "methods": [
             {
-              "name": "show",
+              "name": "open",
               "description": "Opens the tooltip when it is connected and has a trigger and content."
             },
             {
-              "name": "hide",
+              "name": "close",
               "description": "Closes the tooltip."
             },
             {

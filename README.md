@@ -11,13 +11,13 @@
 - Closes on pointer leave, focus leave, Escape, light dismiss, or when another hint popover opens.
 - Uses the default slot as the trigger, without requiring a slot attribute. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--basic-text)
 - Accepts simple text through the `content` attribute. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--basic-text)
-- Accepts rich or fully custom content through the `content` slot. [Rich demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--rich-content) · [Custom demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--custom-content)
-- Supports native `position-area` values and `position-try-fallbacks`. [Positions demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--positions) · [Fallback demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--fallback-positions)
+- Accepts rich or fully custom content through the `content` slot. [Rich demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--rich-content) Â· [Custom demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--custom-content)
+- Supports native `position-area` values and `position-try-fallbacks`. [Positions demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--positions) Â· [Fallback demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--fallback-positions)
 - Supports optional triangular tails that follow the resolved fallback placement. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--with-tail)
 - Provides `xs`, `sm`, `md`, `lg`, and `xl` message sizes. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip-message--sizes)
 - Uses a light design-system surface by default.
 - Preserves authored accessible descriptions and supplies one when needed.
-- Supports imperative `show()`, `hide()`, and `toggle()` methods. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api)
+- Supports imperative `open()`, `close()`, and `toggle()` methods. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api)
 - Exposes CSS variables, CSS parts, and an `open` custom state for styling. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip-style--gallery)
 - Includes TypeScript declarations and a Custom Elements Manifest.
 - Works with plain JavaScript and frameworks that support custom elements.
@@ -40,7 +40,7 @@ Use a popover, menu, or dialog instead when the floating content contains links,
 
 Import `jb-tooltip` once in the browser entry point, then render it like any other custom element.
 
-Framework integration guidance: <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#react" target="_blank" rel="noopener noreferrer">React</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#angular" target="_blank" rel="noopener noreferrer">Angular</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#vue" target="_blank" rel="noopener noreferrer">Vue</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nuxt" target="_blank" rel="noopener noreferrer">Nuxt</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#svelte" target="_blank" rel="noopener noreferrer">Svelte</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#sveltekit" target="_blank" rel="noopener noreferrer">SvelteKit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#solidjs" target="_blank" rel="noopener noreferrer">SolidJS</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#lit" target="_blank" rel="noopener noreferrer">Lit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nextjs" target="_blank" rel="noopener noreferrer">Next.js</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#astro" target="_blank" rel="noopener noreferrer">Astro</a>
+Framework integration guidance: <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#react" target="_blank" rel="noopener noreferrer">React</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#angular" target="_blank" rel="noopener noreferrer">Angular</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#vue" target="_blank" rel="noopener noreferrer">Vue</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nuxt" target="_blank" rel="noopener noreferrer">Nuxt</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#svelte" target="_blank" rel="noopener noreferrer">Svelte</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#sveltekit" target="_blank" rel="noopener noreferrer">SvelteKit</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#solidjs" target="_blank" rel="noopener noreferrer">SolidJS</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#lit" target="_blank" rel="noopener noreferrer">Lit</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nextjs" target="_blank" rel="noopener noreferrer">Next.js</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#astro" target="_blank" rel="noopener noreferrer">Astro</a>
 
 The package also includes a typed React wrapper. See [`react/README.md`](./react/README.md) and the [React demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--basic-text).
 
@@ -118,7 +118,7 @@ Content assigned to the `content` slot takes priority over the `content` attribu
   <button type="button">Build status</button>
 
   <div slot="content" class="build-status-tooltip">
-    <span aria-hidden="true">●</span>
+    <span aria-hidden="true">â—</span>
     All checks passed
   </div>
 </jb-tooltip>
@@ -273,15 +273,15 @@ The size attribute belongs to `jb-tooltip-message`. For a simple `content` attri
 
 | name | returns | description |
 | --- | --- | --- |
-| `show()` | `void` | Opens the tooltip when it is connected and has a trigger and content. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) |
-| `hide()` | `void` | Closes the tooltip. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) |
+| `open()` | `void` | Opens the tooltip when it is connected and has a trigger and content. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) |
+| `close()` | `void` | Closes the tooltip. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) |
 | `toggle()` | `boolean` | Toggles the tooltip and returns its resulting open state. [Demo](https://javadbat.github.io/design-system/?path=/story/components-jbtooltip--imperative-api) |
 
 ```js
 const tooltip = document.querySelector('jb-tooltip');
 
-tooltip.show();
-tooltip.hide();
+tooltip.isOpen;
+tooltip.close();
 const isOpen = tooltip.toggle();
 ```
 
