@@ -13,6 +13,8 @@
   --message-tail-border-color: var(--jb-tooltip-tail-border-color, var(--jb-border-color, #d0d5dd));
   --message-tail-border-width: var(--jb-tooltip-tail-border-width, 1px);
   --message-tail-display: var(--jb-tooltip-message-tail-display, none);
+    /* Others */
+  --corner-shape: var(--jb-tooltip-corner-shape, var(--jb-corner-shape, round));
 }
 
 :host([size="xs"]) {

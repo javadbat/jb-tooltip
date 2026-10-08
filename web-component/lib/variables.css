@@ -2,4 +2,5 @@
   /* Size */
   --tooltip-max-width: var(--jb-tooltip-max-width, min(calc(100vw - 2rem), 20rem));
   --tooltip-gap: var(--jb-tooltip-gap, 0.5rem);
+
 }

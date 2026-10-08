@@ -10,6 +10,7 @@
   border: var(--message-border);
   color: var(--message-text-color);
   background-color: var(--message-bg-color);
+  corner-shape: var(--corner-shape);
   border-radius: var(--message-border-radius);
   box-shadow: var(--message-box-shadow);
   font-size: var(--message-font-size);

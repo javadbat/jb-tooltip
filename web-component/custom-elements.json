@@ -221,6 +221,10 @@
             {
               "name": "--jb-tooltip-tail-border-width",
               "description": "Tail border width."
+            },
+            {
+              "name": "--jb-tooltip-corner-shape",
+              "description": "Corner shape for tooltip elements."
             }
           ]
         }

@@ -12,7 +12,7 @@
     "tooltip",
     "web component"
   ],
-  "version": "0.4.0",
+  "version": "0.5.1",
   "bugs": "https://github.com/javadbat/jb-tooltip/issues",
   "license": "MIT",
   "files": [
@@ -43,6 +43,6 @@
     "url": "https://github.com/javadbat/jb-tooltip.git"
   },
   "dependencies": {
-    "jb-core": "^0.37.0"
+    "jb-core": "^0.38.0"
   }
 }
